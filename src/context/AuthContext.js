@@ -25,6 +25,16 @@ export function AuthProvider({ children }) {
 		return auth.signOut();
 	}
 
+	async function refreshUser() {
+		if (auth.currentUser) {
+			const userDocRef = doc(db, "user", auth.currentUser.uid);
+			const userDoc = await getDoc(userDocRef);
+			if (userDoc.exists()) {
+				setCurrentUser({ ...auth.currentUser, ...userDoc.data() });
+			}
+		}
+	}
+
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged( async user => {
 			if (user) {
@@ -48,7 +58,8 @@ export function AuthProvider({ children }) {
 		currentUser,
 		signup,
 		login,
-		logout
+		logout,
+		refreshUser
 	};
 
 	return (
