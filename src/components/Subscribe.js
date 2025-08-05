@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import './Subscribe.css';
 
 const Subscribe = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, refreshUser } = useAuth();
   const navigate = useNavigate();
 
   const handleSubscription = async () => {
@@ -25,6 +25,7 @@ const Subscribe = () => {
         "subscription.plan": "باقة التميز",
         "subscription.startDate": new Date()
       });
+      await refreshUser();
       toast.success("تم تفعيل اشتراكك بنجاح! استمتع بالدورات.");
       navigate('/courses');
     }
