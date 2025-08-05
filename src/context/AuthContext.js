@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase';
+import { db } from '../firebase';
+import { doc, getDoc} from "firebase/firestore";
 
 const AuthContext = React.createContext();
 
@@ -24,8 +26,19 @@ export function AuthProvider({ children }) {
 	}
 
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user => {
-			setCurrentUser(user);
+		const unsubscribe = auth.onAuthStateChanged( async user => {
+			if (user) {
+				const userDocRef = doc(db, "users", user.uid);
+				const userDoc = await getDoc(userDocRef);
+
+				if (userDoc.exists()) {
+					setCurrentUser({ ...user, ...userDoc.data() });
+				} else {
+					setCurrentUser(user);
+				}
+			} else {
+				setCurrentUser(null);
+			}
 			setLoading(false);
 		})
 		return unsubscribe;

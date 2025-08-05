@@ -1,0 +1,58 @@
+.courses-page {
+  padding: 4rem 2rem;
+}
+
+.courses-page h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.course-card {
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Makes the content fill the card */
+}
+
+.course-card-content h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.course-card-content p {
+  color: var(--text-secondary-color);
+  flex-grow: 1; /* Pushes the level down */
+  margin-bottom: 1.5rem;
+}
+
+.course-level-badge {
+  align-self: flex-start; /* Aligns badge to the left */
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+}

@@ -1,41 +1,45 @@
 .hero-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 90vh;
-    padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: calc(100vh - 80px); /* ارتفاع الشاشة ناقص ارتفاع الشريط العلوي */
+  padding: 0 1rem;
 }
 
 .hero-container h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .hero-container p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin-bottom: 2rem;
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+  color: var(--text-secondary-color);
 }
 
 .hero-button {
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateY(-3px);
 }
 
 @media (max-width: 768px) {
-    .hero-container h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero-container p {
-        font-size: 1rem;
-    }
+  .hero-container h1 {
+    font-size: 2.5rem;
+  }
 }
