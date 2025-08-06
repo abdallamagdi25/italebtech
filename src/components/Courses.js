@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase';
 import './Courses.css';
+import { motion } from 'framer-motion';
+import { sectionVariants, itemVariants } from '../utils/animations';
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -30,24 +32,30 @@ const Courses = () => {
   }
 
   return (
-<div className="courses-page">
-  <h1>الدورات المتاحة</h1>
-  {loading ? (
-    <h2>جاري تحميل الدورات...</h2>
-  ) : (
-    <div className="courses-grid">
-      {courses.map(course => (
-        <div key={course.id} className="course-card">
-          <div className="course-card-content">
-            <h2>{course.title}</h2>
-            <p>{course.description}</p>
-            <span className="course-level-badge">{course.level}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
+    <motion.div
+      id="courses"
+      className="courses-page"
+      variants={sectionVariants}
+      initial="hidden"
+      animate="visible" // animate بدلاً من whileInView لأننا نريدها أن تعمل عند تحميل الصفحة
+    >
+      <motion.h1 variants={itemVariants}>الدورات المتاحة</motion.h1>
+      {loading ? (
+        <p>جاري تحميل الدورات...</p>
+      ) : (
+        <motion.div className="courses-grid" variants={sectionVariants}>
+          {courses.map(course => (
+            <motion.div key={course.id} className="course-card" variants={itemVariants}>
+              <div className="course-card-content">
+                <h2>{course.title}</h2>
+                <p>{course.description}</p>
+                <span className="course-level-badge">{course.level}</span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
+    </motion.div>
   )
 
 };

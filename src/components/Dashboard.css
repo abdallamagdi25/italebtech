@@ -39,3 +39,18 @@
   color: #dc3545;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1.5rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+    word-break: break-word;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

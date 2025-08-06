@@ -38,3 +38,58 @@
         grid-template-columns: 1fr;
     }
 }
+
+.team-member h4 {
+  color: var(--primary-color);
+  font-weight: normal;
+  margin-top: -10px;
+  margin-bottom: 1rem;
+}
+
+.team-member-bio {
+  color: var(--text-secondary-color);
+  margin-bottom: 1.5rem;
+}
+
+.team-member-social a {
+  color: var(--text-secondary-color);
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.team-member-social a:hover {
+  color: var(--primary-color);
+}
+
+/* --- Scroll Arrow Styles --- */
+.team-container {
+  position: relative; /* ضروري لتحديد موضع السهم */
+  padding-bottom: 80px; /* إضافة مساحة للسهم في الأسفل */
+}
+
+.team-container .scroll-arrow-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.team-container .scroll-arrow {
+  font-size: 3.5rem;
+  color: var(--text-secondary-color);
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.1));
+  transition: color 0.3s ease;
+}
+
+.team-container .scroll-arrow-container:hover .scroll-arrow {
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .scroll-arrow-container {
+    display: none;
+  }
+}

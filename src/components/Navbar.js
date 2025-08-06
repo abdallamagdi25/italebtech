@@ -1,44 +1,80 @@
-import React, { useState } from 'react';
-import './Navbar.css';
+import React from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+import './Navbar.css';
+import { FiHome, FiGrid, FiUser, FiLogIn, FiSearch, FiBell } from 'react-icons/fi'; // استيراد الأيقونات الجديدة
 
-function Navbar() {
-	const { currentUser, logout } = useAuth();
-	const [isOpen, setIsOpen] = useState(false);
-	const handleLogout = async () => {
-		try {
-			await logout();
-			toast.info("تم تسجيل الخروج بنجاح.");
-		}
-		catch (error) {
-			toast.error("حدث خطأ أثناء تسجيل الخروج.");
-		}
-	};
+const Navbar = () => {
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
 
-	return (
-		<nav className="navbar-container">
-			<div className="navbar-logo">iTalebTech
-			</div>
-			<ul className={isOpen ? "navbar-links active" : "navbar-links"}>
-				<li className="close-icon" onClick={() => setIsOpen(false)}>
-  &times;
-</li>
-				<li onClick={() => setIsOpen(false)}><a href="/">الرئيسية</a></li>
-				<li onClick={() => setIsOpen(false)}><a href="/courses">الدورات</a></li>
-				{currentUser ? (
-					<li onClick={() => setIsOpen(false)}><button onClick={handleLogout}>تسجيل الخروج</button></li>
-				) : (
-					<li onClick={() => setIsOpen(false)}><a href="/login">تسجيل الدخول</a></li>
-				)}
-			</ul>
-			<div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-				<span />
-				<span />
-				<span />
-			</div>
-		</nav>
-	)
-}
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+      toast.info("تم تسجيل الخروج بنجاح.");
+    } catch (error) {
+      toast.error("حدث خطأ أثناء تسجيل الخروج.");
+    }
+  };
+
+  const handleFeatureSoon = () => {
+    toast.info("هذه الميزة ستكون متاحة قريباً!");
+  };
+
+  return (
+    <>
+      {/* --- Desktop Navbar --- */}
+      <nav className="navbar-desktop">
+        {/* Section 1: Logo */}
+        <div className="nav-left">
+          <Link to="/" className="navbar-logo">iTalebTech</Link>
+        </div>
+
+        {/* Section 2: Main Links */}
+        <div className="nav-center">
+          <ul className="desktop-links">
+            <li><NavLink to="/">الرئيسية</NavLink></li>
+            <li><NavLink to="/courses">الدورات</NavLink></li>
+            {currentUser && <li><NavLink to="/dashboard">لوحة التحكم</NavLink></li>}
+          </ul>
+        </div>
+
+        {/* Section 3: Actions */}
+        <div className="nav-right">
+          <div className="navbar-icons">
+            <button onClick={handleFeatureSoon} className="icon-btn"><FiSearch /></button>
+            <button onClick={handleFeatureSoon} className="icon-btn"><FiBell /></button>
+          </div>
+          {currentUser ? (
+            <button onClick={handleLogout} className="logout-btn">تسجيل الخروج</button>
+          ) : (
+            <Link to="/login" className="login-btn">تسجيل الدخول</Link>
+          )}
+        </div>
+      </nav>
+
+      {/* --- Mobile Top & Bottom Bars (no changes here) --- */}
+      <header className="mobile-top-bar">
+        <Link to="/" className="navbar-logo">iTalebTech</Link>
+        <div className="navbar-icons">
+          <button onClick={handleFeatureSoon} className="icon-btn"><FiSearch /></button>
+          <button onClick={handleFeatureSoon} className="icon-btn"><FiBell /></button>
+        </div>
+      </header>
+
+      <nav className="navbar-mobile">
+        <NavLink to="/" className="mobile-nav-link"><FiHome /><span>الرئيسية</span></NavLink>
+        <NavLink to="/courses" className="mobile-nav-link"><FiGrid /><span>الدورات</span></NavLink>
+        {currentUser ? (
+          <NavLink to="/profile" className="mobile-nav-link"><FiUser /><span>حسابي</span></NavLink>
+        ) : (
+          <NavLink to="/login" className="mobile-nav-link"><FiLogIn /><span>الدخول</span></NavLink>
+        )}
+      </nav>
+    </>
+  );
+};
 
 export default Navbar;

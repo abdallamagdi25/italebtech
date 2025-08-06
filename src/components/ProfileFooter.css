@@ -1,0 +1,28 @@
+.profile-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+.profile-footer-section {
+  margin-bottom: 2rem;
+}
+.profile-footer-section h4 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+.profile-footer-section p {
+  color: var(--text-secondary-color);
+  font-size: 0.9rem;
+}
+.social-links-profile a {
+  color: var(--primary-color);
+  margin: 0 0.75rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.profile-footer-bottom p {
+  font-size: 0.8rem;
+  color: var(--text-secondary-color);
+}

@@ -1,11 +1,23 @@
+/* =================================================================
+   iTalebTech - Global Stylesheet & Brand Identity V2 (RTL)
+   ================================================================= */
+
 :root {
-  --primary-color: #007bff;
-  --primary-hover-color: #0056b3;
-  --background-color: #f8f9fa;
+  --primary-color: #1abc9c;
+  --primary-hover-color: #16a085;
+  --secondary-color: #34495e;
+  --background-color: #ecf0f1;
   --surface-color: #ffffff;
-  --text-color: #212529;
-  --text-secondary-color: #6c757d;
-  --border-color: #dee2e6;
+  --text-color: #2c3e50;
+  --text-secondary-color: #95a5a6;
+  --white-color: #ffffff;
+  --border-color: #e0e0e0;
+  --danger-color: #e74c3c;
+}
+
+html {
+  scroll-behavior: smooth;
+  direction: rtl; 
 }
 
 body {
