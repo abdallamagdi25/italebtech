@@ -1,54 +1,59 @@
 .team-container {
-    padding: 4rem 2rem;
-    text-align: center;
+  padding: 6rem 2rem;
+  text-align: center;
+  background-color: var(--background-color);
+  /* <-- The Fix: Changed to light grey */
+  scroll-margin-top: 70px;
+  position: relative;
 }
 
 .team-container h2 {
-    margin-bottom: 3rem;
-    font-size: 2rem;
+  margin-bottom: 3rem;
+  /* <-- تقليل المسافة تحت العنوان */
+  font-size: 2.5rem;
 }
 
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  /* تقليل المسافة بين البطاقات قليلاً */
+  width: 100%;
 }
 
 .team-member {
-    background-color: var(--white-color);
-    padding:  2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-color); /* <-- Add this for clarity */
+  padding: 2rem;
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Soften the shadow */
 }
 
 .team-member img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1rem;
+  width: 140px;
+  /* تصغير الصورة قليلاً */
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 4px solid var(--surface-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .team-member h3 {
-    margin-bottom: .5rem;
-}
-
-@media (max-width: 768px) {
-    .team-grid {
-        grid-template-columns: 1fr;
-    }
+  margin-bottom: 0.5rem;
 }
 
 .team-member h4 {
   color: var(--primary-color);
   font-weight: normal;
-  margin-top: -10px;
+  margin-top: 0;
   margin-bottom: 1rem;
 }
 
 .team-member-bio {
   color: var(--text-secondary-color);
   margin-bottom: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .team-member-social a {
@@ -63,15 +68,10 @@
   color: var(--primary-color);
 }
 
-/* --- Scroll Arrow Styles --- */
-.team-container {
-  position: relative; /* ضروري لتحديد موضع السهم */
-  padding-bottom: 80px; /* إضافة مساحة للسهم في الأسفل */
-}
-
+/* --- Scroll Arrow (New Addition) --- */
 .team-container .scroll-arrow-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
@@ -86,6 +86,13 @@
 
 .team-container .scroll-arrow-container:hover .scroll-arrow {
   color: var(--primary-color);
+}
+
+@media (max-width: 992px) {
+  .team-container {
+    min-height: auto;
+    padding: 4rem 1rem;
+  }
 }
 
 @media (max-width: 768px) {

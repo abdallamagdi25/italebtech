@@ -25,7 +25,7 @@ const WhyUs = () => {
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
     >
       <motion.h2 variants={itemVariants}>لماذا iTalebTech هي وجهتك الأولى؟</motion.h2>
       <div className="whyus-grid">

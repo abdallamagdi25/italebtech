@@ -1,23 +1,104 @@
 .profile-page-container {
-  max-width: 600px;
+  max-width: 900px;
   margin: 2rem auto;
   padding: 1rem;
 }
 
-.profile-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
+.profile-header-card {
+  display: flex;
+  align-items: center;
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-inline-end: 1.5rem;
+}
+
+.profile-header-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+.profile-header-info p {
+  margin: 0;
+  color: var(--text-secondary-color);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 2fr 1fr; /* Make info card wider */
+  }
+}
+
+.profile-card {
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.profile-header h2 {
-  margin-bottom: 0.5rem;
+.profile-card-header h3 {
+  margin: 0;
 }
 
-.profile-header p {
-  color: var(--text-secondary-color);
-  font-size: 1.1rem;
+.edit-btn, .save-btn {
+  background: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.edit-btn {
+  color: var(--primary-color);
+}
+.edit-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.save-btn {
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  width: 100%;
+  justify-content: center;
+  font-size: 1rem;
+}
+.save-btn:hover {
+  background-color: var(--primary-hover-color);
+}
+
+
+.profile-card-body {
+  padding: 1.5rem;
+}
+
+.info-display p {
+  margin: 0 0 1rem 0;
 }
 
 .profile-menu-item {
@@ -25,7 +106,7 @@
   align-items: center;
   padding: 1.2rem 1rem;
   margin-bottom: 1rem;
-  background-color: var(--surface-color);
+  background-color: var(--primary-color);
   border-radius: 10px;
   text-decoration: none;
   color: var(--text-color);
@@ -36,11 +117,13 @@
   text-align: right;
   font-family: 'Cairo', sans-serif;
   font-size: 1rem;
+  color: var(--white-color);
 }
 
 .profile-menu-item:hover {
   background-color: #f0f0f0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: var(--text-color);
 }
 
 .profile-menu-icon {
@@ -60,7 +143,27 @@
 
 @media (min-width: 769px) {
   .logout-btn {
-    color: #f0f0f0;
+    color: var(--white-color);
     cursor: pointer;
   }
+}
+
+/* Form styles inside the card */
+.profile-card-body .form-group {
+  margin-bottom: 1rem;
+}
+
+.profile-card-body .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.profile-card-body .form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
 }

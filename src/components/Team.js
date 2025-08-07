@@ -27,7 +27,7 @@ const Team = () => {
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
     >
       <motion.h2 variants={itemVariants}>الفريق خلف iTalebTech</motion.h2>
       <div className="team-grid">

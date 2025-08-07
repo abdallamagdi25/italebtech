@@ -76,3 +76,9 @@
 .subscribe-button:hover {
   background-color: var(--primary-hover-color);
 }
+
+@media (max-width: 992px) {
+  .subscribe-page {
+    padding: 80px 20px;
+  }
+}

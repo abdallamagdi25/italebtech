@@ -61,6 +61,7 @@ const Hero = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      viewport={{ once: true, amount: 0.1 }}
     >
       <div className="hero-content">
         <motion.h1 variants={itemVariants}>

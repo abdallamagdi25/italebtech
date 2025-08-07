@@ -1,0 +1,64 @@
+.complete-profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  min-height: 80vh;
+}
+
+.profile-form-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 2.5rem;
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.profile-form-container h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.profile-form-container p {
+  margin-bottom: 2.5rem;
+  color: var(--text-secondary-color);
+}
+
+.profile-form .form-group {
+  text-align: right; /* يجعل الـ label على اليمين */
+  margin-bottom: 1.5rem;
+}
+
+.gender-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.gender-options label {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gender-options input[type="radio"] {
+  display: none; /* إخفاء زر الراديو الافتراضي */
+}
+
+/* تصميم الزر عند الاختيار */
+.gender-options input[type="radio"]:checked + span {
+  font-weight: bold;
+}
+
+.gender-options label:has(input[type="radio"]:checked) {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}

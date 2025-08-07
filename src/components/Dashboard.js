@@ -1,35 +1,59 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import './Dashboard.css';
+import { FiBookOpen, FiStar, FiCreditCard } from 'react-icons/fi';
 
-const Dashboard = () =>  {
+const Dashboard = () => {
   const { currentUser } = useAuth();
 
-  return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1>مرحباً بعودتك، {currentUser?.email}!</h1>
-        <p>هنا يمكنك متابعة رحلتك التعليمية.</p>
-      </div>
+  // We use the user's first name if it exists, otherwise we show their email.
+  const displayName = currentUser?.firstName || currentUser?.email;
 
-      <div className="dashboard-grid">
-        <div className="dashboard-card">
-          <h3>حالة الاشتراك</h3>
-          {currentUser?.subscription?.status === 'active' ? (
-            <p className="status-active">فعال</p>
-          ) : (
-            <p className="status-inactive">غير فعال</p>
-          )}
-          <p>الباقة الحالية: {currentUser?.subscription?.plan || 'لا يوجد'}</p>
+  return (
+    <div className="dashboard-page">
+      <header className="dashboard-header">
+        <h1>مرحباً بعودتك، {displayName}!</h1>
+        <p>مستعد لتبني مشروعك التالي؟ لننطلق.</p>
+      </header>
+
+      <div className="dashboard-widgets">
+        {/* Widget 1: My Subscription */}
+        <div className="widget-card">
+          <FiCreditCard className="widget-icon" />
+          <div className="widget-content">
+            <h3>اشتراكك</h3>
+            {currentUser?.subscription?.status === 'active' ? (
+              <p className="status-active">فعال - {currentUser.subscription.plan}</p>
+            ) : (
+              <p className="status-inactive">غير فعال</p>
+            )}
+            <Link to="/subscribe" className="widget-link">إدارة الاشتراك</Link>
+          </div>
         </div>
 
-        <div className="dashboard-card">
-          <h3>الدورات التي بدأتها</h3>
-          <p>قريباً... هنا ستظهر الدورات التي تتابعها حالياً.</p>
+        {/* Widget 2: My Progress */}
+        <div className="widget-card">
+          <FiStar className="widget-icon" />
+          <div className="widget-content">
+            <h3>مستوى تقدمك</h3>
+            <p>0 دورة مكتملة</p>
+            <span className="widget-link-placeholder">عرض الإنجازات (قريباً)</span>
+          </div>
+        </div>
+        
+        {/* Widget 3: Start Learning */}
+        <div className="widget-card cta-card">
+          <FiBookOpen className="widget-icon" />
+          <div className="widget-content">
+            <h3>استكشف الدورات</h3>
+            <p>ابدأ رحلتك التعليمية الآن وتصفح مكتبة المشاريع الكاملة.</p>
+            <Link to="/courses" className="widget-link button-style">عرض كل الدورات</Link>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Dashboard;

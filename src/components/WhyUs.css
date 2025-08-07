@@ -1,47 +1,55 @@
 .whyus-container {
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* <-- أهم تعديل: اجعل ارتفاعه يملأ الشاشة */
+  padding: 4rem 2rem;
   text-align: center;
-  scroll-margin-top: 80px;
+  background-color: var(--background-color);
+  position: relative;
+  scroll-margin-top: 70px;
 }
+
 .whyus-container h2 {
-  margin-bottom: 3rem;
-  font-size: 2rem;
+  margin-bottom: 4rem;
+  font-size: 2.5rem;
 }
+
 .whyus-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 2.5rem;
+  width: 100%;
 }
+
 .whyus-card {
   background-color: var(--surface-color);
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
+
 .whyus-icon {
   font-size: 3rem;
   color: var(--primary-color);
   margin-bottom: 1.5rem;
 }
+
 .whyus-card h3 {
   margin-bottom: 1rem;
 }
+
 .whyus-card p {
   color: var(--text-secondary-color);
   line-height: 1.7;
 }
 
-/* --- Scroll Arrow Styles --- */
-.whyus-container {
-  position: relative; /* ضروري لتحديد موضع السهم */
-  padding-bottom: 80px; /* إضافة مساحة للسهم في الأسفل */
-}
-
+/* Scroll Arrow */
 .whyus-container .scroll-arrow-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
@@ -56,6 +64,14 @@
 
 .whyus-container .scroll-arrow-container:hover .scroll-arrow {
   color: var(--primary-color);
+}
+
+@media (max-width: 992px) {
+  .whyus-container {
+    padding: 4rem 1rem;
+    min-height: auto;
+    /* إلغاء الارتفاع الكامل على الهاتف لتجنب المشاكل */
+  }
 }
 
 @media (max-width: 768px) {

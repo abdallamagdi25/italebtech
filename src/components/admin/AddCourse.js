@@ -3,14 +3,17 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { toast } from 'react-toastify';
 import './Admin.css';
+import { useAuth } from '../../context/AuthContext';
 
 const AddCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [level, setLevel] = useState('Beginner');
+  const { setIsProcessing } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsProcessing(true);
 
     if (!title || !description || !level) {
       return alert("Please fill out all fields.");
@@ -31,6 +34,8 @@ const AddCourse = () => {
     }
     catch (error) {
       toast.error("فشلت إضافة الدورة. يرجى المحاولة مرة أخرى.");
+    } finally {
+      setIsProcessing(false);
     }
   };
 

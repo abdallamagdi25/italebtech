@@ -1,34 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth, db } from '../../firebase';
-import './Auth.css';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db } from '../../firebase';
+import { toast } from 'react-toastify';
+import './Auth.css';
+import { FcGoogle } from 'react-icons/fc';
 
-function Login() {
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const { login, setIsProcessing } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsProcessing(true);
+
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await login(email, password);
+      const user = userCredential.user;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists() && userDoc.data().profileComplete) {
+        navigate('/dashboard');
+      } else {
+        navigate('/complete-profile');
+      }
       toast.success("أهلاً بعودتك!");
-      console.log("sign in successfully", userCredential.user);
-      navigate('/dashboard');
-    }
-    catch (error) {
-      toast.error("فشلت عملية الدخول. يرجى التحقق من البريد الإلكتروني وكلمة المرور.");
-    }
-  }
 
-
+    } catch (error) {
+      console.error("Full Login Error:", error);
+      toast.error("فشلت عملية الدخول. يرجى التحقق من البيانات.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
+    setIsProcessing(true);
 
     try {
       const result = await signInWithPopup(auth, provider);
@@ -40,27 +54,26 @@ function Login() {
         await setDoc(userDocRef, {
           email: user.email,
           createdAt: new Date(),
-          subscription: {
-            status: "inactive",
-            plan: null
-          }
+          profileComplete: false,
+          subscription: { status: "inactive", plan: null }
         });
-        toast.info("تم إنشاء ملفك الشخصي بنجاح!");
       }
-      toast.success("أهلاً بعودتك!");
-      navigate('/dashboard');
-    }
-    catch (error) {
+
+      const updatedUserDoc = await getDoc(userDocRef);
+
+      if (updatedUserDoc.exists() && updatedUserDoc.data().profileComplete) {
+        navigate('/dashboard');
+      } else {
+        navigate('/complete-profile');
+      }
+
+    } catch (error) {
       console.error("Error with Google login: ", error);
-      toast.error("حدث خطأ أثناء محاولة الدخول باستخدام جوجل.");
+      toast.error("حدث خطأ أثناء الدخول باستخدام جوجل.");
+    } finally {
+      setIsProcessing(false);
     }
   };
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/dashboard');
-    }
-  }, [currentUser, navigate]);
 
   return (
     <div className="auth-page">
@@ -93,19 +106,19 @@ function Login() {
               />
             </div>
             <button type="submit" className="auth-button">تسجيل الدخول</button>
-            <button
-              type="button"
-              className="auth-button google-btn"
-              onClick={handleGoogleLogin}
-            >الدخول باستخدام جوجل</button>
           </form>
+          <div className="auth-divider"><span>أو</span></div>
+          <button onClick={handleGoogleLogin} className="auth-button google-btn">
+            <FcGoogle className="google-btn-icon" />
+            <span>الدخول باستخدام جوجل</span>
+          </button>
           <div className="auth-switch-link">
             <p>ليس لديك حساب؟ <Link to="/signup">أنشئ حسابًا جديدًا</Link></p>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;

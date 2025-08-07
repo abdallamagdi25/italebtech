@@ -5,15 +5,21 @@ import { Navigate, useLocation } from 'react-router-dom';
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
   const location = useLocation();
-  
+
+  // الفحص الأول: هل المستخدم مسجل دخوله؟
   if (!currentUser) {
-    return < Navigate to="/login" state={{ from: location}} replace/>
+    return <Navigate to="/login" replace />;
   }
 
-  if (location.pathname !== '/subscribe' && currentUser.subscription?.status !== 'active') {
-    return < Navigate to="/subscribe" />
-  }
+  // الفحص الثاني (الذكي): هل اشتراك المستخدم فعال؟
+  const isSubscriptionActive = currentUser.subscription?.status === 'active';
 
+  // صفحة الدورات هي الوحيدة التي تتطلب اشتراكًا فعالاً
+  if (location.pathname === '/courses' && !isSubscriptionActive) {
+    return <Navigate to="/subscribe" />;
+  }
+  
+  // إذا نجح في كل الفحوصات، اسمح له بالمرور
   return children;
 };
 

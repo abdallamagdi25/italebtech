@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import './Subscribe.css';
 
 const Subscribe = () => {
-  const { currentUser, refreshUser } = useAuth();
+  const { currentUser, refreshUser, setIsProcessing } = useAuth();
   const navigate = useNavigate();
 
   const handleSubscription = async () => {
+    setIsProcessing(true);
 
     if (!currentUser) {
       toast.error("سجل الدخول اولا قبل الاشتراك");
@@ -27,10 +28,12 @@ const Subscribe = () => {
       });
       await refreshUser();
       toast.success("تم تفعيل اشتراكك بنجاح! استمتع بالدورات.");
-      navigate('/courses');
+      navigate('/profile');
     }
     catch (error) {
       toast.error("فشل تفعيل الاشتراك. يرجى المحاولة مرة أخرى.");
+    } finally {
+      setIsProcessing(false);
     }
   };
 

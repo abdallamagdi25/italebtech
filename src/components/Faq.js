@@ -32,7 +32,7 @@ const Faq = () => {
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
     >
       <motion.h2 variants={itemVariants}>أسئلة شائعة</motion.h2>
       <motion.div className="faq-grid" variants={itemVariants}>

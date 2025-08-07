@@ -1,20 +1,42 @@
 /* =================================================================
-   iTalebTech - Global Stylesheet & Brand Identity V2 (RTL)
+   iTalebTech - Global Stylesheet & Brand Identity V3 (Blue Palette)
    ================================================================= */
 
+/* --- 1. Brand Color Palette (لوحة الألوان الزرقاء الجديدة) --- */
 :root {
-  --primary-color: #1abc9c;
-  --primary-hover-color: #16a085;
-  --secondary-color: #34495e;
-  --background-color: #ecf0f1;
-  --surface-color: #ffffff;
-  --text-color: #2c3e50;
-  --text-secondary-color: #95a5a6;
+  /* -- اللون الأساسي (Primary) -- */
+  /* أزرق ساطع وحيوي. يستخدم للأزرار والروابط والأيقونات الهامة. */
+  --primary-color: #007bff; 
+  
+  /* لون أغمق قليلاً عند مرور الماوس (hover). */
+  --primary-hover-color: #0069d9;
+
+  /* -- ألوان النصوص (Text) -- */
+  /* كحلي داكن جدًا. بديل احترافي للأسود الصريح للنصوص الرئيسية. */
+  --text-color: #0d2c4f;
+  
+  /* أزرق رمادي. للنصوص الفرعية والوصفية. */
+  --text-secondary-color: #6a85a6;
+  
+  /* أبيض نقي. للنصوص فوق الخلفيات الملونة. */
   --white-color: #ffffff;
-  --border-color: #e0e0e0;
+
+  /* -- ألوان الخلفيات والأسطح (Surfaces) -- */
+  /* أزرق باهت وفاتح جدًا. لون الخلفية العام للصفحات. */
+  --background-color: #f0f6ff;
+  
+  /* أبيض نقي. للبطاقات والأقسام المرتفعة لخلق تباين. */
+  --surface-color: #ffffff;
+
+  /* -- ألوان مساعدة (Utility) -- */
+  /* أزرق فاتح جدًا. للحدود والخطوط الفاصلة. */
+  --border-color: #cce3ff;
+
+  /* لون أحمر قياسي لرسائل الخطأ. */
   --danger-color: #e74c3c;
 }
 
+/* --- 2. Global Settings (الإعدادات العامة مع RTL) --- */
 html {
   scroll-behavior: smooth;
   direction: rtl; 
@@ -31,4 +53,13 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+@keyframes shine-effect {
+  0% {
+    transform: translateX(-200%) skewX(-25deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-25deg);
+  }
 }

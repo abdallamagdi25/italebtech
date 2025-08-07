@@ -18,12 +18,15 @@ import Courses from './components/Courses';
 import Subscribe from './components/Subscribe';
 import AddCourse from './components/admin/AddCourse';
 import ProfilePage from './components/ProfilePage';
+import CompleteProfile from './components/auth/CompleteProfile';
+import LoadingOverlay from './components/LoadingOverlay';
 
 
 function App() {
   return (
     <Router>
       <div className="app-container">
+        <LoadingOverlay />
         <Navbar />
         <ToastContainer
           position="bottom-center"
@@ -48,6 +51,7 @@ function App() {
             <Route path="/subscribe" element={<ProtectedRoute><Subscribe /></ProtectedRoute>} />
             <Route path="/admin/add-course" element={<ProtectedRoute><AddCourse /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path="/complete-profile" element={<ProtectedRoute><CompleteProfile /></ProtectedRoute>} />
           </Routes>
         </main>
         <Footer />

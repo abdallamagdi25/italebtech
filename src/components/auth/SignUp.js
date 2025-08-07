@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../firebase';
-import { doc, setDoc } from "firebase/firestore";
-import { db } from '../../firebase';
-import './Auth.css';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useAuth } from '../../context/AuthContext';
+import { auth, db } from '../../firebase';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'
+import './Auth.css';
+import { FcGoogle } from 'react-icons/fc';
 
-function SignUp() {
-  const navigate = useNavigate();
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+  const { setIsProcessing } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsProcessing(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -22,27 +24,50 @@ function SignUp() {
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
         createdAt: new Date(),
-        subscription: {
-          status: "inactive",
-          plan: null
-        }
+        profileComplete: false,
+        subscription: { status: "inactive", plan: null }
       });
 
-      toast.success("تم إنشاء حسابك بنجاح! مرحباً بك في iTalebTech.");
-      navigate('/dashboard');
-    }
-    catch (error) {
-      toast.error("حدث خطأ. قد يكون البريد الإلكتروني مستخدماً بالفعل.");
-    }
-  }
+      toast.success("تم إنشاء حسابك بنجاح!");
+      navigate('/complete-profile'); // توجيه مباشر وواضح
 
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/dashboard');
+    } catch (error) {
+      console.error("Error signing up:", error);
+      toast.error("فشل إنشاء الحساب. قد يكون البريد الإلكتروني مستخدماً بالفعل.");
     }
-  }, [currentUser, navigate]);
+    finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    setIsProcessing(true);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (!userDoc.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          createdAt: new Date(),
+          profileComplete: false,
+          subscription: { status: "inactive", plan: null }
+        });
+      }
+
+      navigate('/complete-profile'); // توجيه مباشر وواضح للمستخدم الجديد
+
+    } catch (error) {
+      console.error("Error with Google login: ", error);
+      toast.error("حدث خطأ أثناء محاولة الدخول باستخدام جوجل.");
+    }
+    finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <div className="auth-page">
@@ -60,7 +85,7 @@ function SignUp() {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)} // <-- الإصلاح الأول هنا
                 required
               />
             </div>
@@ -70,12 +95,20 @@ function SignUp() {
                 id="password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)} // <-- الإصلاح الثاني هنا
                 required
               />
             </div>
             <button type="submit" className="auth-button">إنشاء الحساب</button>
           </form>
+
+          <div className="auth-divider"><span>أو</span></div>
+
+          <button onClick={handleGoogleLogin} className="auth-button google-btn">
+            <FcGoogle className="google-btn-icon" /> {/* <-- الإصلاح الثالث هنا */}
+            <span>إنشاء حساب باستخدام جوجل</span>
+          </button>
+
           <div className="auth-switch-link">
             <p>لديك حساب بالفعل؟ <Link to="/login">سجل الدخول</Link></p>
           </div>
@@ -83,6 +116,6 @@ function SignUp() {
       </div>
     </div>
   )
-}
+};
 
 export default SignUp;
