@@ -3,8 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* <-- أهم تعديل: اجعل ارتفاعه يملأ الشاشة */
   padding: 4rem 2rem;
   background-color: var(--background-color);
   scroll-margin-top: 70px;

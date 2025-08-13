@@ -4,11 +4,12 @@ import { db } from '../../firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import './CompleteProfile.css'; // 1. استيراد ملف التصميم الجديد
+import './CompleteProfile.css';
 
 const CompleteProfile = () => {
   const { currentUser, refreshUser } = useAuth();
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -29,9 +30,9 @@ const CompleteProfile = () => {
         ...formData,
         profileComplete: true
       });
-      await refreshUser();
+      await refreshUser(); // This is the crucial step to update the context
       toast.success("تم تحديث ملفك الشخصي بنجاح!");
-      navigate('/dashboard');
+      navigate('/dashboard'); // Now this will work correctly
     } catch (error) {
       toast.error("حدث خطأ أثناء تحديث البيانات.");
       console.error(error);

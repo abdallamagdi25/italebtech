@@ -1,10 +1,10 @@
 .team-container {
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   text-align: center;
   background-color: var(--background-color);
-  /* <-- The Fix: Changed to light grey */
   scroll-margin-top: 70px;
   position: relative;
+  min-height: calc(100vh - 80px);
 }
 
 .team-container h2 {
@@ -26,6 +26,10 @@
   padding: 2rem;
   border-radius: 10px; /* Add rounded corners */
   box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Soften the shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .team-member img {
@@ -54,6 +58,7 @@
   color: var(--text-secondary-color);
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
+  overflow: scroll;
 }
 
 .team-member-social a {

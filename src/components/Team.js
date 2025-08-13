@@ -33,11 +33,8 @@ const Team = () => {
       <div className="team-grid">
         <motion.div className="team-member" variants={itemVariants}>
           <img src={abdalla} alt="صورة المؤسس الأول" />
-          <h3>عبد الله مجدي</h3>
-          <h4>مؤسس وقائد المنتج</h4>
-          <p className="team-member-bio">
-            طالب ميكاترونكس بجامعة بني سويف التكنولوجية. شغوف ببناء الأشياء من الصفر وتحويل الأفكار إلى واقع ملموس. أسس iTalebTech إيمانًا منه بأن التطبيق العملي هو الجسر الوحيد بين الدراسة الأكاديمية وسوق العمل الحقيقي.
-          </p>
+          <h3>Abdalla Magdy</h3>
+          <h4>Co-Founder & CTO</h4>
           <div className="team-member-social">
             <a href="linkedin.com">LinkedIn</a>
             <a href="github.com">GitHub</a>
@@ -45,11 +42,8 @@ const Team = () => {
         </motion.div>
         <motion.div className="team-member" variants={itemVariants}>
           <img src={ali} alt="صورة المؤسس الثانى" />
-          <h3>على حسام</h3>
-          <h4>شريك مؤسس ومدير النمو</h4>
-          <p className="team-member-bio">
-            خبير في استراتيجيات التسويق الرقمي وبناء المجتمعات. مهمته هي إيصال صوت iTalebTech لكل طالب طموح، وبناء شبكة قوية من المبدعين والمطورين في مصر.
-          </p>
+          <h3>Aly Hossam</h3>
+          <h4>Co-Founder & CEO</h4>
           <div className="team-member-social">
             <a href="linkedin.com">LinkedIn</a>
             <a href="github.com">GitHub</a>
@@ -57,11 +51,8 @@ const Team = () => {
         </motion.div>
         <motion.div className="team-member" variants={itemVariants}>
           <img src={yousef} alt="صورة المؤسس الثالث" />
-          <h3>يوسف عماد</h3>
-          <h4>شريك مؤسس وقائد المحتوى</h4>
-          <p className="team-member-bio">
-            مطور متخصص في الانظمة المدمجة . يؤمن بأن تبسيط المفاهيم المعقدة هو مفتاح الإبداع. يعمل على توسيع مكتبة دورات iTalebTech لتشمل كل ما يحتاجه المطور الحديث.
-          </p>
+          <h3>Yousef Emad</h3>
+          <h4>Co-Founder & CMO</h4>
           <div className="team-member-social">
             <a href="linkedin.com">LinkedIn</a>
             <a href="github.com">GitHub</a>

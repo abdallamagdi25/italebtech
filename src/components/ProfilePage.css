@@ -24,10 +24,13 @@
 .profile-header-info h2 {
   margin: 0;
   font-size: 1.8rem;
+  word-break: break-word;
 }
+
 .profile-header-info p {
   margin: 0;
   color: var(--text-secondary-color);
+  word-break: break-word;
 }
 
 .profile-grid {
@@ -38,7 +41,7 @@
 
 @media (min-width: 768px) {
   .profile-grid {
-    grid-template-columns: 2fr 1fr; /* Make info card wider */
+    grid-template-columns: 2fr 1fr;
   }
 }
 
@@ -133,22 +136,14 @@
 }
 
 .logout-btn {
-  color: #dc3545;
+  color: #f0f0f0;
   cursor: pointer;
 }
 
 .logout-btn .profile-menu-icon {
-  color: #dc3545;
+  color: #f0f0f0;
 }
 
-@media (min-width: 769px) {
-  .logout-btn {
-    color: var(--white-color);
-    cursor: pointer;
-  }
-}
-
-/* Form styles inside the card */
 .profile-card-body .form-group {
   margin-bottom: 1rem;
 }
@@ -166,4 +161,21 @@
   border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .logout-btn {
+    color: var(--white-color);
+    cursor: pointer;
+  }
+
+  .profile-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-header-card{
+    flex-direction: column;
+  }
 }
