@@ -1,25 +1,22 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import LoadingOverlay from './LoadingOverlay'; // سنستخدم شاشة التحميل
 
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useAuth();
-  const location = useLocation();
+  const { currentUser, loading } = useAuth(); // We get the initial loading state
 
-  // الفحص الأول: هل المستخدم مسجل دخوله؟
+  // If the initial authentication check is still running, show a loader
+  if (loading) {
+    return <LoadingOverlay />;
+  }
+
+  // After initial load, if there is no user, redirect to login
   if (!currentUser) {
     return <Navigate to="/login" replace />;
   }
 
-  // الفحص الثاني (الذكي): هل اشتراك المستخدم فعال؟
-  const isSubscriptionActive = currentUser.subscription?.status === 'active';
-
-  // صفحة الدورات هي الوحيدة التي تتطلب اشتراكًا فعالاً
-  if (location.pathname === '/courses' && !isSubscriptionActive) {
-    return <Navigate to="/subscribe" />;
-  }
-  
-  // إذا نجح في كل الفحوصات، اسمح له بالمرور
+  // If the user is logged in, allow them to see the content
   return children;
 };
 

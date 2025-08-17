@@ -15,6 +15,7 @@ const Footer = () => {
             <li><a href="/">الرئيسية</a></li>
             <li><a href="/courses">الدورات</a></li>
             <li><a href="/subscribe">الاشتراك</a></li>
+            <li><a href="/about">عنّا</a></li>
           </ul>
         </div>
         <div className="footer-section">

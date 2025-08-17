@@ -3,7 +3,7 @@ import './Hero.css';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiChevronDown } from 'react-icons/fi'; // فقط هذه الأيقونة
+// import { FiChevronDown } from 'react-icons/fi'; // فقط هذه الأيقونة
 import testImage from '../assets/images/test-image.jpg';
 
 const Hero = () => {
@@ -43,17 +43,17 @@ const Hero = () => {
     },
   };
 
-  // تعريف حركة السهم
-  const arrowVariants = {
-    animate: {
-      y: [0, 10, 0], // حركة للأعلى والأسفل
-      transition: {
-        duration: 1.5,
-        ease: "easeInOut",
-        repeat: Infinity,
-      }
-    }
-  };
+  // // تعريف حركة السهم
+  // const arrowVariants = {
+  //   animate: {
+  //     y: [0, 10, 0], // حركة للأعلى والأسفل
+  //     transition: {
+  //       duration: 1.5,
+  //       ease: "easeInOut",
+  //       repeat: Infinity,
+  //     }
+  //   }
+  // };
 
   return (
     <motion.section
@@ -81,14 +81,14 @@ const Hero = () => {
       </motion.div>
 
       {/* سهم التمرير (النسخة المصححة) */}
-      <motion.a
+      {/* <motion.a
         href="#why-us"
         className="scroll-arrow-container"
         variants={arrowVariants}
         animate="animate"
       >
         <FiChevronDown className="scroll-arrow" />
-      </motion.a>
+      </motion.a> */}
     </motion.section>
   );
 };

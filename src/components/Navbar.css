@@ -1,4 +1,8 @@
-/* --- Desktop Navbar Styles --- */
+/* =================================================================
+   Navbar Component - Final Version
+   ================================================================= */
+
+/* --- Desktop Navbar Styles (> 992px) --- */
 .navbar-desktop {
   display: flex;
   justify-content: space-between;
@@ -20,11 +24,15 @@
 }
 
 .navbar-logo {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: var(--primary-color);
   text-decoration: none;
-  margin-left: 2rem;
+  margin-inline-end: 2rem;
+  /* RTL-friendly margin */
+}
+
+.navbar-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .desktop-links {
@@ -33,18 +41,26 @@
   margin: 0;
   padding: 0;
   gap: 2rem;
+  align-items: center;
 }
 
-.desktop-links a {
+.desktop-links a,
+.desktop-links .nav-link-button {
   text-decoration: none;
   color: var(--text-secondary-color);
   font-weight: bold;
   padding: 0.5rem 0;
   border-bottom: 2px solid transparent;
   transition: color 0.3s ease, border-bottom-color 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
 }
 
-.desktop-links a:hover {
+.desktop-links a:hover,
+.desktop-links .nav-link-button:hover {
   color: var(--primary-color);
 }
 
@@ -79,10 +95,12 @@
   color: var(--primary-color);
 }
 
-.login-btn, .logout-btn {
+.login-btn,
+.logout-btn {
   padding: 0.6rem 1.5rem;
   color: var(--white-color);
-  background-color: var(--primary-color);
+  background: linear-gradient(45deg, var(--primary-hover-color), var(--primary-color));
+  background-size: 150% 100%;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
@@ -90,28 +108,17 @@
   cursor: pointer;
   font-family: 'Cairo', sans-serif;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-
-  /* --- New Shine Effect --- */
-  position: relative;
-  overflow: hidden;
-}
-
-.login-btn::before, .logout-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-  animation: shine-effect 3s infinite ease-in;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+  transition: all 0.3s ease-out;
 }
 
 .login-btn:hover,
 .logout-btn:hover {
-  background-color: var(--primary-hover-color);
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.3);
 }
+
 
 /* --- Hide Mobile Elements on Desktop --- */
 .navbar-mobile,
@@ -119,7 +126,8 @@
   display: none;
 }
 
-/* --- Mobile Styles --- */
+
+/* --- Mobile Styles (<= 992px) --- */
 @media (max-width: 992px) {
   .navbar-desktop {
     display: none;
@@ -129,7 +137,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.5rem;
     background-color: var(--surface-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     position: fixed;
@@ -140,8 +148,12 @@
     height: 60px;
   }
 
+  .mobile-top-bar .navbar-logo {
+    margin: 0;
+  }
+
   .mobile-top-bar .navbar-icons .icon-btn {
-    margin-right: 0.75rem;
+    margin-inline-start: 0.75rem;
   }
 
   .navbar-mobile {
@@ -168,6 +180,8 @@
     flex-grow: 1;
     height: 100%;
     transition: color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    /* Improves mobile touch feel */
   }
 
   .mobile-nav-link svg {

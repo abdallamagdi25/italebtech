@@ -4,6 +4,7 @@ import { db } from '../firebase';
 import './Courses.css';
 import { motion } from 'framer-motion';
 import { sectionVariants, itemVariants } from '../utils/animations';
+import { Link } from 'react-router-dom';
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -45,14 +46,17 @@ const Courses = () => {
       ) : (
         <motion.div className="courses-grid" variants={sectionVariants}>
           {courses.map(course => (
-            <motion.div key={course.id} className="course-card" variants={itemVariants}>
-              <div className="course-card-content">
-                <h2>{course.title}</h2>
-                <p>{course.description}</p>
-                <span className="course-level-badge">{course.level}</span>
-              </div>
-            </motion.div>
+            <Link to={`/courses/${course.id}`} key={course.id} className="course-card-link">
+              <motion.div key={course.id} className="course-card" variants={itemVariants}>
+                <div className="course-card-content">
+                  <h2>{course.title}</h2>
+                  <p>{course.description}</p>
+                  <span className="course-level-badge">{course.level}</span>
+                </div>
+              </motion.div>
+            </Link>
           ))}
+
         </motion.div>
       )}
     </motion.div>

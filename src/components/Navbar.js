@@ -3,7 +3,8 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import './Navbar.css';
-import { FiHome, FiGrid, FiUser, FiLogIn, FiSearch, FiBell } from 'react-icons/fi'; // استيراد الأيقونات الجديدة
+import { FiHome, FiGrid, FiUser, FiLogIn, FiSearch, FiBell } from 'react-icons/fi';
+import logo from '../assets/images/logo.png';
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
@@ -27,12 +28,11 @@ const Navbar = () => {
     <>
       {/* --- Desktop Navbar --- */}
       <nav className="navbar-desktop">
-        {/* Section 1: Logo */}
         <div className="nav-left">
-          <Link to="/" className="navbar-logo">iTalebTech</Link>
+          <Link to="/" className="navbar-logo">
+            <img src={logo} alt="iTalebTech Logo" />
+          </Link>
         </div>
-
-        {/* Section 2: Main Links */}
         <div className="nav-center">
           <ul className="desktop-links">
             <li><NavLink to="/">الرئيسية</NavLink></li>
@@ -40,8 +40,6 @@ const Navbar = () => {
             {currentUser && <li><NavLink to="/dashboard">لوحة التحكم</NavLink></li>}
           </ul>
         </div>
-
-        {/* Section 3: Actions */}
         <div className="nav-right">
           <div className="navbar-icons">
             <button onClick={handleFeatureSoon} className="icon-btn"><FiSearch /></button>
@@ -50,20 +48,21 @@ const Navbar = () => {
           {currentUser ? (
             <button onClick={handleLogout} className="logout-btn">تسجيل الخروج</button>
           ) : (
-            <Link to="/login" className="login-btn">سجل الان</Link>
+            <Link to="/login" className="login-btn">سجل الآن</Link>
           )}
         </div>
       </nav>
-
-      {/* --- Mobile Top & Bottom Bars (no changes here) --- */}
+      
+      {/* --- Mobile Top & Bottom Bars --- */}
       <header className="mobile-top-bar">
-        <Link to="/" className="navbar-logo">iTalebTech</Link>
+        <Link to="/" className="navbar-logo">
+          <img src={logo} alt="iTalebTech Logo" />
+        </Link>
         <div className="navbar-icons">
           <button onClick={handleFeatureSoon} className="icon-btn"><FiSearch /></button>
           <button onClick={handleFeatureSoon} className="icon-btn"><FiBell /></button>
         </div>
       </header>
-
       <nav className="navbar-mobile">
         <NavLink to="/" className="mobile-nav-link"><FiHome /><span>الرئيسية</span></NavLink>
         <NavLink to="/courses" className="mobile-nav-link"><FiGrid /><span>الدورات</span></NavLink>

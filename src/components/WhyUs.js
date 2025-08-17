@@ -3,20 +3,20 @@ import './WhyUs.css';
 import { motion } from 'framer-motion';
 import { sectionVariants, itemVariants } from '../utils/animations';
 import { FaProjectDiagram, FaChalkboardTeacher, FaUsers } from 'react-icons/fa';
-import { FiChevronDown } from 'react-icons/fi';
+// import { FiChevronDown } from 'react-icons/fi';
 
 const WhyUs = () => {
 
-  const arrowVariants = {
-    animate: {
-      y: [0, 10, 0],
-      transition: {
-        duration: 1.5,
-        ease: "easeInOut",
-        repeat: Infinity,
-      }
-    }
-  };
+  // const arrowVariants = {
+  //   animate: {
+  //     y: [0, 10, 0],
+  //     transition: {
+  //       duration: 1.5,
+  //       ease: "easeInOut",
+  //       repeat: Infinity,
+  //     }
+  //   }
+  // };
 
   return (
     <motion.section
@@ -45,14 +45,14 @@ const WhyUs = () => {
           <p>انضم إلى شبكة من الطلاب والمطورين الطموحين مثلك تمامًا لتبادل الخبرات والتعاون في المشاريع.</p>
         </motion.div>
       </div>
-      <motion.a
+      {/* <motion.a
         href="#team"
         className="scroll-arrow-container"
         variants={arrowVariants}
         animate="animate"
       >
         <FiChevronDown className="scroll-arrow" />
-      </motion.a>
+      </motion.a> */}
     </motion.section>
   );
 };

@@ -5,20 +5,20 @@ import { sectionVariants, itemVariants } from '../utils/animations';
 import abdalla from '../assets/images/abdalla.jpg';
 import ali from '../assets/images/ali.jpg';
 import yousef from '../assets/images/yousef.jpg';
-import { FiChevronDown } from 'react-icons/fi';
+// import { FiChevronDown } from 'react-icons/fi';
 
 const Team = () => {
 
-  const arrowVariants = {
-    animate: {
-      y: [0, 10, 0],
-      transition: {
-        duration: 1.5,
-        ease: "easeInOut",
-        repeat: Infinity,
-      }
-    }
-  };
+  // const arrowVariants = {
+  //   animate: {
+  //     y: [0, 10, 0],
+  //     transition: {
+  //       duration: 1.5,
+  //       ease: "easeInOut",
+  //       repeat: Infinity,
+  //     }
+  //   }
+  // };
 
   return (
     <motion.section
@@ -59,14 +59,14 @@ const Team = () => {
           </div>
         </motion.div>
       </div>
-      <motion.a
+      {/* <motion.a
         href="#faq"
         className="scroll-arrow-container"
         variants={arrowVariants}
         animate="animate"
       >
         <FiChevronDown className="scroll-arrow" />
-      </motion.a>
+      </motion.a> */}
     </motion.section>
   );
 };

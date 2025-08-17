@@ -2,6 +2,11 @@
   padding: 4rem 2rem;
 }
 
+.course-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .courses-page h1 {
   text-align: center;
   margin-bottom: 3rem;
@@ -33,7 +38,8 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Makes the content fill the card */
+  flex-grow: 1;
+  /* Makes the content fill the card */
 }
 
 .course-card-content h2 {
@@ -43,12 +49,14 @@
 
 .course-card-content p {
   color: var(--text-secondary-color);
-  flex-grow: 1; /* Pushes the level down */
+  flex-grow: 1;
+  /* Pushes the level down */
   margin-bottom: 1.5rem;
 }
 
 .course-level-badge {
-  align-self: flex-start; /* Aligns badge to the left */
+  align-self: flex-start;
+  /* Aligns badge to the left */
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
   background-color: var(--primary-color);
