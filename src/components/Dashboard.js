@@ -28,7 +28,9 @@ const Dashboard = () => {
             ) : (
               <p className="status-inactive">غير فعال</p>
             )}
-            <Link to="/subscribe" className="widget-link">إدارة الاشتراك</Link>
+            <a href="https://wa.me/+201032296981" target="_blank" rel="noopener noreferrer" className="widget-link">
+              تواصل معنا لتفعيل اشتراكك
+            </a>
           </div>
         </div>
 
@@ -41,7 +43,7 @@ const Dashboard = () => {
             <span className="widget-link-placeholder">عرض الإنجازات (قريباً)</span>
           </div>
         </div>
-        
+
         {/* Widget 3: Start Learning */}
         <div className="widget-card cta-card">
           <FiBookOpen className="widget-icon" />

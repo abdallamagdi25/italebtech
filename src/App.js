@@ -19,13 +19,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-import Subscribe from './components/Subscribe';
+// import Subscribe from './components/Subscribe';
 import ProfilePage from './components/ProfilePage';
 import CompleteProfile from './components/auth/CompleteProfile';
 import AddCourse from './components/admin/AddCourse';
 import NotFound from './components/NotFound';
 import AboutPage from './pages/AboutPage';
 import AddArticle from './components/admin/AddArticle';
+import ForgotPassword from './components/auth/ForgotPassword';
 
 // This is the main application content, now wrapped in a Router
 const MainApp = () => {
@@ -46,12 +47,13 @@ const MainApp = () => {
             <Route path="/dashboard" element={<ProtectedRoute><AnimatedPage><Dashboard /></AnimatedPage></ProtectedRoute>} />
             <Route path="/courses" element={<ProtectedRoute><AnimatedPage><Courses /></AnimatedPage></ProtectedRoute>} />
             <Route path="/courses/:courseId" element={<ProtectedRoute><AnimatedPage><CourseDetail /></AnimatedPage></ProtectedRoute>} />
-            <Route path="/subscribe" element={<ProtectedRoute><AnimatedPage><Subscribe /></AnimatedPage></ProtectedRoute>} />
+            {/* <Route path="/subscribe" element={<ProtectedRoute><AnimatedPage><Subscribe /></AnimatedPage></ProtectedRoute>} /> */}
             <Route path="/profile" element={<ProtectedRoute><AnimatedPage><ProfilePage /></AnimatedPage></ProtectedRoute>} />
             <Route path="/complete-profile" element={<ProtectedRoute><AnimatedPage><CompleteProfile /></AnimatedPage></ProtectedRoute>} />
             <Route path="/admin/add-course" element={<ProtectedRoute><AnimatedPage><AddCourse /></AnimatedPage></ProtectedRoute>} />
             <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
             <Route path="/admin/add-article" element={<ProtectedRoute><AddArticle /></ProtectedRoute>} />
+            <Route path="/forgot-password" element={<AnimatedPage><ForgotPassword /></AnimatedPage>} />
             
             <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
           </Routes>

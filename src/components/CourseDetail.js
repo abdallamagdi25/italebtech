@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // استيراد useNavigate
+import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useAuth } from '../context/AuthContext'; // استيراد useAuth
-import { toast } from 'react-toastify'; // استيراد toast
+import { useAuth } from '../context/AuthContext';
 import './CourseDetail.css';
-import { FiPlayCircle, FiLock } from 'react-icons/fi';
+import { FiLock, FiPlayCircle } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 const CourseDetail = () => {
   const { courseId } = useParams();
   const { currentUser } = useAuth();
-  const navigate = useNavigate();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,12 +37,9 @@ const CourseDetail = () => {
 
   const handleLessonClick = () => {
     if (isSubscribed) {
-      // مستقبلاً: هنا سنفتح مشغل الفيديو
       toast.info("ميزة مشاهدة الفيديوهات قيد التطوير!");
     } else {
-      // حاليًا: نوجهه لصفحة الاشتراك
-      toast.error("هذا المحتوى حصري للمشتركين. يرجى الاشتراك أولاً.");
-      navigate('/subscribe');
+      toast.error("هذا المحتوى حصري للمشتركين. تواصل معنا لتفعيل اشتراكك.");
     }
   };
 
@@ -62,9 +58,17 @@ const CourseDetail = () => {
         <p>{course.description}</p>
         <span className="level-badge">{course.level}</span>
       </header>
+
+      {/* رسالة خاصة لغير المشتركين */}
+      {!isSubscribed && (
+        <div className="activation-prompt">
+          <FiLock />
+          <span>يبدو أن اشتراكك غير فعال. تواصل معنا عبر واتساب لتفعيل اشتراكك والوصول لكل الدروس!</span>
+        </div>
+      )}
+
       <div className="course-roadmap">
         <h2>خارطة طريق الدورة</h2>
-        
         <ul className="lessons-list">
           {course.lessons?.map((lesson, index) => (
             <li key={index} className="lesson-item">
@@ -73,9 +77,9 @@ const CourseDetail = () => {
                 <h3>{lesson.title}</h3>
                 <p>{lesson.description}</p>
               </div>
-              <button onClick={handleLessonClick} className="lesson-play-btn">
+              <button onClick={handleLessonClick} className="lesson-play-btn" disabled={!isSubscribed}>
                 {isSubscribed ? <FiPlayCircle /> : <FiLock />}
-                <span>{isSubscribed ? 'ابدأ الدرس' : 'اشترك للمشاهدة'}</span>
+                <span>{isSubscribed ? 'ابدأ الدرس' : 'مغلق'}</span>
               </button>
             </li>
           ))}

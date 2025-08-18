@@ -159,3 +159,23 @@
 .lesson-play-btn:has(svg:first-child[class*="FiLock"]):hover {
   background-color: #5a6a7a;
 }
+
+.activation-prompt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fff3cd; /* لون أصفر تحذيري */
+  color: #664d03;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+.activation-prompt svg {
+  font-size: 1.5rem;
+}
+
+.lesson-play-btn[disabled] {
+  background-color: var(--text-secondary-color);
+  cursor: not-allowed;
+}

@@ -153,3 +153,19 @@
     box-shadow: none; /* Optional: Remove shadow on mobile for a cleaner look */
   }
 }
+
+
+
+.forgot-password-link {
+  text-align: left; /* RTL: left */
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+.forgot-password-link a {
+  color: var(--text-secondary-color);
+  text-decoration: none;
+}
+.forgot-password-link a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}

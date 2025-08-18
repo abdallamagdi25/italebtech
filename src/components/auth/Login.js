@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import './Auth.css';
 import { FcGoogle } from 'react-icons/fc';
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -104,6 +105,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <div className="forgot-password-link">
+                <Link to="/forgot-password">نسيت كلمة السر؟</Link>
+              </div>
             </div>
             <button type="submit" className="auth-button">تسجيل الدخول</button>
           </form>
