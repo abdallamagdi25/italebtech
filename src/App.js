@@ -27,6 +27,7 @@ import NotFound from './components/NotFound';
 import AboutPage from './pages/AboutPage';
 import AddArticle from './components/admin/AddArticle';
 import ForgotPassword from './components/auth/ForgotPassword';
+import AdminRoute from './components/AdminRoute';
 
 // This is the main application content, now wrapped in a Router
 const MainApp = () => {
@@ -48,12 +49,14 @@ const MainApp = () => {
             <Route path="/courses" element={<ProtectedRoute><AnimatedPage><Courses /></AnimatedPage></ProtectedRoute>} />
             <Route path="/courses/:courseId" element={<ProtectedRoute><AnimatedPage><CourseDetail /></AnimatedPage></ProtectedRoute>} />
             {/* <Route path="/subscribe" element={<ProtectedRoute><AnimatedPage><Subscribe /></AnimatedPage></ProtectedRoute>} /> */}
+            {/* <Route path="/subscribe" element={<ProtectedRoute><AnimatedPage><Subscribe /></AnimatedPage></ProtectedRoute>} /> */}
             <Route path="/profile" element={<ProtectedRoute><AnimatedPage><ProfilePage /></AnimatedPage></ProtectedRoute>} />
             <Route path="/complete-profile" element={<ProtectedRoute><AnimatedPage><CompleteProfile /></AnimatedPage></ProtectedRoute>} />
-            <Route path="/admin/add-course" element={<ProtectedRoute><AnimatedPage><AddCourse /></AnimatedPage></ProtectedRoute>} />
             <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
-            <Route path="/admin/add-article" element={<ProtectedRoute><AddArticle /></ProtectedRoute>} />
             <Route path="/forgot-password" element={<AnimatedPage><ForgotPassword /></AnimatedPage>} />
+            {/* Admin Routes */}
+            <Route path="/admin/add-article" element={<ProtectedRoute><AdminRoute><AddArticle /></AdminRoute></ProtectedRoute>} />
+            <Route path="/admin/add-course" element={<ProtectedRoute><AnimatedPage><AdminRoute><AddCourse /></AdminRoute></AnimatedPage></ProtectedRoute>} />
             
             <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
           </Routes>

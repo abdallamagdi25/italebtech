@@ -77,7 +77,7 @@ const CourseDetail = () => {
                 <h3>{lesson.title}</h3>
                 <p>{lesson.description}</p>
               </div>
-              <button onClick={handleLessonClick} className="lesson-play-btn" disabled={!isSubscribed}>
+              <button onClick={handleLessonClick} className="lesson-play-btn">
                 {isSubscribed ? <FiPlayCircle /> : <FiLock />}
                 <span>{isSubscribed ? 'ابدأ الدرس' : 'مغلق'}</span>
               </button>

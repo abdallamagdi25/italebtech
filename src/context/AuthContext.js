@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup
@@ -57,25 +57,30 @@ export function AuthProvider({ children }) {
       setIsProcessing(false); // Hide loader
     }
   }
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
+        const idTokenResult = await user.getIdTokenResult(); // <-- سحب الختم
         const userDocRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
+
+        const finalUser = {
+          ...user,
+          isAdmin: idTokenResult.claims.admin === true // <-- إضافة خاصية الأدمن
+        };
+
         if (userDoc.exists()) {
-          setCurrentUser({ ...user, ...userDoc.data() });
+          setCurrentUser({ ...finalUser, ...userDoc.data() });
         } else {
-          // This case handles a user who exists in Auth but maybe their doc creation failed.
-          // Or a new Google user before their doc is created.
-          setCurrentUser(user);
+          setCurrentUser(finalUser);
         }
       } else {
         setCurrentUser(null);
       }
       setLoading(false);
     });
-    return unsubscribe; // Cleanup on unmount
+    return unsubscribe;
   }, []);
 
   const value = {
