@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+// import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useAuth } from '../../context/AuthContext';
 import { auth, db } from '../../firebase';
 import { toast } from 'react-toastify';
 import './Auth.css';
-import { FcGoogle } from 'react-icons/fc';
+// import { FcGoogle } from 'react-icons/fc';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +18,13 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.error("كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي على حرف ورقم واحد على الأقل.");
+      return; // أوقف تنفيذ الدالة إذا كانت كلمة المرور ضعيفة
+    }
+
     setIsProcessing(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -40,34 +49,34 @@ const SignUp = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    setIsProcessing(true);
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      const userDocRef = doc(db, "users", user.uid);
-      const userDoc = await getDoc(userDocRef);
+  // const handleGoogleLogin = async () => {
+  //   const provider = new GoogleAuthProvider();
+  //   setIsProcessing(true);
+  //   try {
+  //     const result = await signInWithPopup(auth, provider);
+  //     const user = result.user;
+  //     const userDocRef = doc(db, "users", user.uid);
+  //     const userDoc = await getDoc(userDocRef);
 
-      if (!userDoc.exists()) {
-        await setDoc(userDocRef, {
-          email: user.email,
-          createdAt: new Date(),
-          profileComplete: false,
-          subscription: { status: "inactive", plan: null }
-        });
-      }
+  //     if (!userDoc.exists()) {
+  //       await setDoc(userDocRef, {
+  //         email: user.email,
+  //         createdAt: new Date(),
+  //         profileComplete: false,
+  //         subscription: { status: "inactive", plan: null }
+  //       });
+  //     }
 
-      navigate('/complete-profile'); // توجيه مباشر وواضح للمستخدم الجديد
+  //     navigate('/complete-profile'); // توجيه مباشر وواضح للمستخدم الجديد
 
-    } catch (error) {
-      console.error("Error with Google login: ", error);
-      toast.error("حدث خطأ أثناء محاولة الدخول باستخدام جوجل.");
-    }
-    finally {
-      setIsProcessing(false);
-    }
-  };
+  //   } catch (error) {
+  //     console.error("Error with Google login: ", error);
+  //     toast.error("حدث خطأ أثناء محاولة الدخول باستخدام جوجل.");
+  //   }
+  //   finally {
+  //     setIsProcessing(false);
+  //   }
+  // };
 
   return (
     <div className="auth-page">
@@ -102,12 +111,14 @@ const SignUp = () => {
             <button type="submit" className="auth-button">إنشاء الحساب</button>
           </form>
 
+          {/*
           <div className="auth-divider"><span>أو</span></div>
 
           <button onClick={handleGoogleLogin} className="auth-button google-btn">
-            <FcGoogle className="google-btn-icon" /> {/* <-- الإصلاح الثالث هنا */}
+            <FcGoogle className="google-btn-icon" />
             <span>إنشاء حساب باستخدام جوجل</span>
           </button>
+          */}
 
           <div className="auth-switch-link">
             <p>لديك حساب بالفعل؟ <Link to="/login">سجل الدخول</Link></p>
