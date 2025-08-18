@@ -1,7 +1,0 @@
-@media (max-width: 992px) {
-  .main-content {
-    /* Add padding to prevent content from being hidden by the fixed navbars */
-    padding-top: 60px; 
-    padding-bottom: 65px; 
-  }
-}
