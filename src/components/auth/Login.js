@@ -9,6 +9,7 @@ import { db } from '../../firebase';
 import { toast } from 'react-toastify';
 import './Auth.css';
 // import { FcGoogle } from 'react-icons/fc';
+import PasswordInput from '../common/PasswordInput';
 
 
 const Login = () => {
@@ -93,6 +94,7 @@ const Login = () => {
               <input
                 id="email"
                 type="email"
+                placeholder="أدخل البريد الإلكترونى"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -100,12 +102,9 @@ const Login = () => {
             </div>
             <div className="form-group">
               <label htmlFor="password">كلمة المرور</label>
-              <input
-                id="password"
-                type="password"
+              <PasswordInput
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
               />
               <div className="forgot-password-link">
                 <Link to="/forgot-password">نسيت كلمة السر؟</Link>

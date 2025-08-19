@@ -1,5 +1,8 @@
 import React from 'react';
-import './ProfileFooter.css';
+import './Footer.css';
+// 1. استيراد الأيقونات
+import { FaFacebookF, FaLinkedinIn, FaYoutube, FaInstagram } from 'react-icons/fa';
+
 
 const ProfileFooter = () => {
   return (
@@ -10,11 +13,12 @@ const ProfileFooter = () => {
       </div>
       <div className="profile-footer-section">
         <h4>تواصل معنا</h4>
-        <div className="social-links-profile">
-          <a href="facebook.com">Facebook</a>
-          <a href="linkedin.com">LinkedIn</a>
-          <a href="youtube.com">YouTube</a>
-        </div>
+          <div className="social-links">
+            <a href="facebook.com/italebtech" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
+            <a href="instagram.com/italebtech" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+            <a href="linkedin.com/italebtech" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
+            <a href="youtube.com/italebtech" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+          </div>
       </div>
       <div className="profile-footer-bottom">
         <p>&copy; 2025 iTalebTech. كل الحقوق محفوظة.</p>

@@ -2,9 +2,9 @@ import React from 'react';
 import './Team.css';
 import { motion } from 'framer-motion';
 import { sectionVariants, itemVariants } from '../utils/animations';
-import abdalla from '../assets/images/abdalla.jpg';
-import ali from '../assets/images/ali.jpg';
-import yousef from '../assets/images/yousef.jpg';
+import abdalla from '../assets/images/abdalla.png';
+import aly from '../assets/images/aly.png';
+import yousef from '../assets/images/yousef.png';
 // import { FiChevronDown } from 'react-icons/fi';
 
 const Team = () => {
@@ -34,29 +34,17 @@ const Team = () => {
         <motion.div className="team-member" variants={itemVariants}>
           <img src={abdalla} alt="صورة المؤسس الأول" />
           <h3>Abdalla Magdy</h3>
-          <h4>Co-Founder & CTO</h4>
-          <div className="team-member-social">
-            <a href="linkedin.com">LinkedIn</a>
-            <a href="github.com">GitHub</a>
-          </div>
+          <h4>Co-Founder</h4>
         </motion.div>
         <motion.div className="team-member" variants={itemVariants}>
-          <img src={ali} alt="صورة المؤسس الثانى" />
+          <img src={aly} alt="صورة المؤسس الثانى" />
           <h3>Aly Hossam</h3>
-          <h4>Co-Founder & CEO</h4>
-          <div className="team-member-social">
-            <a href="linkedin.com">LinkedIn</a>
-            <a href="github.com">GitHub</a>
-          </div>
+          <h4>Co-Founder</h4>
         </motion.div>
         <motion.div className="team-member" variants={itemVariants}>
           <img src={yousef} alt="صورة المؤسس الثالث" />
           <h3>Yousef Emad</h3>
-          <h4>Co-Founder & CMO</h4>
-          <div className="team-member-social">
-            <a href="linkedin.com">LinkedIn</a>
-            <a href="github.com">GitHub</a>
-          </div>
+          <h4>Co-Founder</h4>
         </motion.div>
       </div>
       {/* <motion.a

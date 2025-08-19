@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 // import { FiChevronDown } from 'react-icons/fi'; // فقط هذه الأيقونة
-import testImage from '../assets/images/test-image.jpg';
+import heroImage from '../assets/images/hero.png';
 
 const Hero = () => {
   const navigate = useNavigate(); // 3. تهيئة أداة التوجيه
@@ -65,7 +65,7 @@ const Hero = () => {
     >
       <div className="hero-content">
         <motion.h1 variants={itemVariants}>
-          ابنِ أساسًا هندسيًا صلبًا بمشاريع حقيقية، وليس مجرد نظريات.
+          ابنِ أساسًا صلبًا بمشاريع حقيقية، وليس مجرد نظريات.
         </motion.h1>
         <motion.p variants={itemVariants}>
           منصة iTalebTech مصممة لطلاب الجامعات التكنولوجية لمساعدتك على تحويل معرفتك إلى خبرة عملية.
@@ -77,7 +77,7 @@ const Hero = () => {
         </motion.div>
       </div>
       <motion.div className="hero-image" variants={itemVariants}>
-        <img src={testImage} alt="خلفية تقنية لمشروع iTalebTech" />
+        <img src={heroImage} alt="خلفية تقنية لمشروع iTalebTech" />
       </motion.div>
 
       {/* سهم التمرير (النسخة المصححة) */}

@@ -9,6 +9,7 @@ import { auth, db } from '../../firebase';
 import { toast } from 'react-toastify';
 import './Auth.css';
 // import { FcGoogle } from 'react-icons/fc';
+import PasswordInput from '../common/PasswordInput';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -93,6 +94,7 @@ const SignUp = () => {
               <input
                 id="email"
                 type="email"
+                placeholder="أدخل البريد الإلكترونى"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} // <-- الإصلاح الأول هنا
                 required
@@ -100,13 +102,13 @@ const SignUp = () => {
             </div>
             <div className="form-group">
               <label htmlFor="password">كلمة المرور</label>
-              <input
-                id="password"
-                type="password"
+              <PasswordInput
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} // <-- الإصلاح الثاني هنا
-                required
+                onChange={(e) => setPassword(e.target.value)}
               />
+            </div>
+            <div>
+              <p>كلمة المرور يجب أن تتكون من حروف وأرقام فقط</p>
             </div>
             <button type="submit" className="auth-button">إنشاء الحساب</button>
           </form>
