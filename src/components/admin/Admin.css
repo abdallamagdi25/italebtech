@@ -56,3 +56,147 @@
 .admin-form .submit-btn:hover {
   background-color: var(--primary-hover-color);
 }
+
+/* أضف هذا في نهاية ملف Admin.css */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  text-align: right;
+}
+
+.admin-table th {
+  background-color: var(--background-color);
+}
+
+.action-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.add-new-btn {
+  display: inline-block;
+  margin-bottom: 1rem;
+  /* ... add more styles */
+}
+
+.current-lessons {
+  margin-bottom: 2rem;
+}
+
+/* أضف هذا في نهاية ملف Admin.css */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn.edit {
+  background-color: #ffc107;
+}
+
+.action-btn.delete {
+  background-color: var(--danger-color);
+}
+
+/* أضف هذا في نهاية ملف Admin.css */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  background-color: var(--surface-color);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  text-align: right;
+}
+
+.admin-table th {
+  background-color: var(--background-color);
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+}
+
+.action-btn.edit {
+  background-color: #ffc107;
+}
+
+.action-btn.delete {
+  background-color: var(--danger-color);
+}
+
+.add-new-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* أضف هذا في نهاية ملف Admin.css */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.status-badge.active {
+  background-color: #28a745;
+}
+
+.status-badge.inactive {
+  background-color: var(--danger-color);
+}
+
+.user-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+  background: var(--background-color);
+  padding: 1rem;
+  border-radius: 5px;
+}

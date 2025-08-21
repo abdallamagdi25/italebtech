@@ -74,13 +74,15 @@ const CourseDetail = () => {
             <li key={index} className="lesson-item">
               <div className="lesson-number">{index + 1}</div>
               <div className="lesson-content">
-                <h3>{lesson.title}</h3>
-                <p>{lesson.description}</p>
+                <div className="lesson-text">
+                  <h3>{lesson.title}</h3>
+                  <p>{lesson.description}</p>
+                </div>
+                <button onClick={handleLessonClick} className="lesson-play-btn" disabled={!isSubscribed}>
+                  {isSubscribed ? <FiPlayCircle /> : <FiLock />}
+                  <span>{isSubscribed ? 'ابدأ الدرس' : 'مغلق'}</span>
+                </button>
               </div>
-              <button onClick={handleLessonClick} className="lesson-play-btn">
-                {isSubscribed ? <FiPlayCircle /> : <FiLock />}
-                <span>{isSubscribed ? 'ابدأ الدرس' : 'مغلق'}</span>
-              </button>
             </li>
           ))}
         </ul>

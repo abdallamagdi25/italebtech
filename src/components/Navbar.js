@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import './Navbar.css';
-import { FiHome, FiGrid, FiUser, FiLogIn, FiSearch, FiBell } from 'react-icons/fi';
+import { FiHome, FiGrid, FiUser, FiLogIn, FiSearch, FiBell, FiInfo } from 'react-icons/fi';
 import logo from '../assets/images/logo.png';
 
 const Navbar = () => {
@@ -44,6 +44,13 @@ const Navbar = () => {
           <div className="navbar-icons">
             <button onClick={handleFeatureSoon} className="icon-btn"><FiSearch /></button>
             <button onClick={handleFeatureSoon} className="icon-btn"><FiBell /></button>
+            
+            {/* --- The New Profile Icon Link --- */}
+            {currentUser && (
+              <NavLink to="/profile" className="icon-btn profile-icon">
+                <FiUser />
+              </NavLink>
+            )}
           </div>
           {currentUser ? (
             <button onClick={handleLogout} className="logout-btn">تسجيل الخروج</button>
@@ -52,7 +59,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      
+
       {/* --- Mobile Top & Bottom Bars --- */}
       <header className="mobile-top-bar">
         <Link to="/" className="navbar-logo">
@@ -71,6 +78,7 @@ const Navbar = () => {
         ) : (
           <NavLink to="/login" className="mobile-nav-link"><FiLogIn /><span>الدخول</span></NavLink>
         )}
+        <NavLink to="/info" className="mobile-nav-link"><FiInfo /><span>معلومات</span></NavLink>
       </nav>
     </>
   );

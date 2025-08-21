@@ -1,0 +1,62 @@
+.article-page-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 2.5rem;
+  padding: 0 1rem;
+}
+
+.article-main-content {
+  flex: 3;
+  min-width: 0; /* Fix for flexbox overflow */
+}
+
+.article-title {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.article-meta {
+  color: var(--text-secondary-color);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.article-meta span {
+  margin-inline-end: 1.5rem;
+}
+
+.article-hero-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.article-body {
+  font-size: 1.1rem;
+  line-height: 2;
+  max-width: 750px; /* Important for readability */
+}
+
+.article-body p {
+  margin-bottom: 1.5rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+  .article-page-container {
+    flex-direction: column-reverse; /* Sidebar moves to the bottom */
+  }
+  .article-sidebar {
+    position: static; /* Un-stick the sidebar */
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .article-title {
+    font-size: 2rem;
+  }
+}

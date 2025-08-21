@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './ProfilePage.css';
-import { FiGrid, FiSettings, FiLogOut, FiCreditCard, FiEdit, FiSave } from 'react-icons/fi';
+import { FiUser, FiGrid, FiSettings, FiLogOut, FiCreditCard, FiEdit, FiSave, FiShield, FiFileText } from 'react-icons/fi';
 import { db } from '../firebase';
 import { doc, updateDoc } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { currentUser, logout, refreshUser, setIsProcessing } = useAuth();
@@ -36,7 +35,6 @@ const ProfilePage = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     setIsProcessing(true);
-
     try {
       const userDocRef = doc(db, "users", currentUser.uid);
       await updateDoc(userDocRef, {
@@ -68,7 +66,7 @@ const ProfilePage = () => {
   return (
     <div className="profile-page-container">
       <div className="profile-header-card">
-        <img src={`https://ui-avatars.com/api/?name=${currentUser?.firstName || 'A'}&background=0D8ABC&color=fff&size=128`} alt="User Avatar" className="profile-avatar" />
+        <img src={`https://ui-avatars.com/api/?name=${currentUser?.firstName || currentUser?.email}&background=0D8ABC&color=fff&size=128`} alt="User Avatar" className="profile-avatar" />
         <div className="profile-header-info">
           <h2>{formData.firstName} {formData.lastName}</h2>
           <p>{currentUser?.email}</p>
@@ -76,7 +74,36 @@ const ProfilePage = () => {
       </div>
 
       <div className="profile-grid">
-        {/* Personal Information Card */}
+        {/* --- Admin Panel Card (Only shows for Admins) --- */}
+        {currentUser?.isAdmin && (
+          <div className="profile-card admin-card">
+            <div className="profile-card-header">
+              <h3><FiShield /> لوحة تحكم الأدمن</h3>
+            </div>
+            <div className="profile-card-body">
+              <div className="profile-menu">
+                <Link to="/admin/users" className="profile-menu-item">
+                  <FiUser className="profile-menu-icon" />
+                  <span>إدارة المستخدمين</span>
+                </Link>
+                <Link to="/admin/courses" className="profile-menu-item">
+                  <FiGrid className="profile-menu-icon" />
+                  <span>إدارة الدورات والدروس</span>
+                </Link>
+                <Link to="/admin/add-article" className="profile-menu-item">
+                  <FiFileText className="profile-menu-icon" />
+                  <span>إضافة مقال جديد</span>
+                </Link>
+                <Link to="/admin/articles" className="profile-menu-item">
+                  <FiFileText className="profile-menu-icon" />
+                  <span>إدارة المقالات</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* --- Personal Information Card --- */}
         <div className="profile-card">
           <div className="profile-card-header">
             <h3>المعلومات الشخصية</h3>
@@ -111,7 +138,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Account Actions Card */}
+        {/* --- Account Actions Card --- */}
         <div className="profile-card">
           <div className="profile-card-header">
             <h3>إجراءات الحساب</h3>

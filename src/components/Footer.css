@@ -81,3 +81,9 @@
   color: #7f8c8d;
   font-size: 0.9rem;
 }
+
+@media (max-width: 992px) {
+  .footer-container {
+    display: none;
+  }
+}

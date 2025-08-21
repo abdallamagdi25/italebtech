@@ -198,3 +198,15 @@
     color: var(--primary-color);
   }
 }
+
+/* Add space between icon groups and buttons */
+.nav-right {
+  gap: 1.5rem;
+}
+
+/* Style for the active profile icon */
+.icon-btn.profile-icon.active {
+  color: var(--primary-color);
+  background-color: #e6f2ff; /* A light blue background for active state */
+  border-radius: 50%;
+}

@@ -37,7 +37,7 @@
 }
 
 .course-roadmap {
-  padding: 2rem;
+  padding: 2rem 0;
 }
 
 .course-roadmap h2 {
@@ -50,22 +50,22 @@
   list-style: none;
   padding: 0;
   position: relative;
-  /* Creates the timeline effect */
-  border-right: 3px solid var(--border-color);
-  margin-right: 1.5rem;
+  border-inline-start: 3px solid var(--border-color); 
+  margin-inline-start: 1.5rem;
 }
 
 .lesson-item {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
-  padding-right: 3rem;
+  padding-inline-start: 3rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 .lesson-number {
   position: absolute;
-  right: -23px;
-  /* Position over the timeline border */
-  top: 0;
+  inset-inline-start: -23px; 
+  top: 5px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -77,62 +77,33 @@
   font-weight: bold;
   font-size: 1.2rem;
   border: 4px solid var(--background-color);
+  flex-shrink: 0;
 }
 
 .lesson-content {
   background-color: var(--surface-color);
   padding: 1.5rem;
   border-radius: 8px;
-}
-
-.lesson-content h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
-
-.lesson-content p {
-  margin: 0;
-  color: var(--text-secondary-color);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .course-detail-page {
-    padding: 1rem;
-  }
-
-  .course-detail-header h1 {
-    font-size: 2rem;
-  }
-
-  .lessons-list {
-    margin-right: 1rem;
-    border-width: 2px;
-  }
-
-  .lesson-item {
-    padding-right: 2rem;
-  }
-
-  .lesson-number {
-    right: -18px;
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-    border-width: 3px;
-  }
-}
-
-
-.lesson-item {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
 }
 
+.lesson-text h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-text p {
+  margin: 0;
+  color: var(--text-secondary-color);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
 .lesson-play-btn {
-  margin-right: auto;
-  /* Push the button to the left in RTL */
   background-color: var(--primary-color);
   color: var(--white-color);
   border: none;
@@ -145,37 +116,43 @@
   align-items: center;
   gap: 0.5rem;
   transition: background-color 0.3s ease;
+  flex-shrink: 0;
 }
 
-.lesson-play-btn:hover {
-  background-color: var(--primary-hover-color);
+.lesson-play-btn:hover { 
+  background-color: var(--primary-hover-color); 
 }
 
-/* Style for non-subscribed users */
-.lesson-play-btn:has(svg:first-child[class*="FiLock"]) {
-  background-color: var(--text-secondary-color);
-}
-
-.lesson-play-btn:has(svg:first-child[class*="FiLock"]):hover {
-  background-color: #5a6a7a;
+.lesson-play-btn[disabled] { 
+  background-color: var(--text-secondary-color); 
+  cursor: not-allowed; 
 }
 
 .activation-prompt {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: #fff3cd; /* لون أصفر تحذيري */
-  color: #664d03;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  font-weight: bold;
+  display: flex; align-items: center; gap: 1rem;
+  background-color: #fff3cd; color: #664d03;
+  padding: 1rem 1.5rem; border-radius: 8px;
+  margin: 0 0 2rem 0; font-weight: bold;
 }
-.activation-prompt svg {
-  font-size: 1.5rem;
-}
+.activation-prompt svg { font-size: 1.5rem; }
 
-.lesson-play-btn[disabled] {
-  background-color: var(--text-secondary-color);
-  cursor: not-allowed;
+/* --- Mobile Adjustments --- */
+@media (max-width: 768px) {
+  .course-detail-page { padding: 1rem; }
+  .course-detail-header { padding: 1.5rem; }
+  .course-detail-header h1 { font-size: 2rem; }
+  
+  .lessons-list { margin-inline-start: 1rem; border-inline-start-width: 2px; }
+  .lesson-item { padding-inline-start: 2rem; }
+  .lesson-number { inset-inline-start: -18px; width: 30px; height: 30px; font-size: 1rem; border-width: 3px; }
+  
+  .lesson-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lesson-play-btn {
+    margin-top: 1rem;
+    justify-content: center;
+  }
 }

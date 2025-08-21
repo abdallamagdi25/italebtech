@@ -28,6 +28,19 @@ import AboutPage from './pages/AboutPage';
 import AddArticle from './components/admin/AddArticle';
 import ForgotPassword from './components/auth/ForgotPassword';
 import AdminRoute from './components/AdminRoute';
+import AdminCoursesList from './components/admin/AdminCoursesList';
+import ManageLessons from './components/admin/ManageLessons';
+import ArticlePage from './pages/ArticlePage';
+import AdminArticlesList from './components/admin/AdminArticlesList';
+import EditArticle from './components/admin/EditArticle';
+import InfoPage from './pages/InfoPage';
+import AdminUsersList from './components/admin/AdminUsersList';
+import AdminUserDetail from './components/admin/AdminUserDetail';
+
+// داخل Routes
+
+
+// داخل Routes
 
 // This is the main application content, now wrapped in a Router
 const MainApp = () => {
@@ -43,7 +56,9 @@ const MainApp = () => {
             <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
             <Route path="/signup" element={<AnimatedPage><SignUp /></AnimatedPage>} />
             <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
-            
+            <Route path="/articles/:articleId" element={<AnimatedPage><ArticlePage /></AnimatedPage>} />
+            <Route path="/info" element={<AnimatedPage><InfoPage /></AnimatedPage>} />
+
             {/* Protected Routes */}
             <Route path="/dashboard" element={<ProtectedRoute><AnimatedPage><Dashboard /></AnimatedPage></ProtectedRoute>} />
             <Route path="/courses" element={<ProtectedRoute><AnimatedPage><Courses /></AnimatedPage></ProtectedRoute>} />
@@ -57,7 +72,14 @@ const MainApp = () => {
             {/* Admin Routes */}
             <Route path="/admin/add-article" element={<ProtectedRoute><AdminRoute><AddArticle /></AdminRoute></ProtectedRoute>} />
             <Route path="/admin/add-course" element={<ProtectedRoute><AnimatedPage><AdminRoute><AddCourse /></AdminRoute></AnimatedPage></ProtectedRoute>} />
-            
+            <Route path="/admin/courses" element={<ProtectedRoute><AdminRoute><AdminCoursesList /></AdminRoute></ProtectedRoute>} />
+            <Route path="/admin/course/:courseId/lessons" element={<ProtectedRoute><AdminRoute><ManageLessons /></AdminRoute></ProtectedRoute>} />
+            <Route path="/admin/articles" element={<ProtectedRoute><AdminRoute><AdminArticlesList /></AdminRoute></ProtectedRoute>} />
+            <Route path="/admin/edit-article/:articleId" element={<ProtectedRoute><AdminRoute><EditArticle /></AdminRoute></ProtectedRoute>} />
+            <Route path="/admin/users" element={<ProtectedRoute><AdminRoute><AdminUsersList /></AdminRoute></ProtectedRoute>} />
+            <Route path="/admin/user/:userId" element={<ProtectedRoute><AdminRoute><AdminUserDetail /></AdminRoute></ProtectedRoute>} />
+
+
             <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
           </Routes>
         </AnimatePresence>
