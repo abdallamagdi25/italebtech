@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutPage.css';
-import Team from '../components/Team'; // سنقوم باستيراد مكون الفريق الجاهز
+// import Team from '../components/Team'; // سنقوم باستيراد مكون الفريق الجاهز
 import { motion } from 'framer-motion';
 
 const AboutPage = () => {
@@ -26,7 +26,7 @@ const AboutPage = () => {
         </div>
       </div>
       {/* هنا نقوم بعرض مكون الفريق */}
-      <Team />
+      {/* <Team /> */}
     </motion.div>
   );
 };

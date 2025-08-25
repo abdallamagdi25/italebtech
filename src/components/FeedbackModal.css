@@ -1,0 +1,78 @@
+/* الغطاء الخلفي */
+.feedback-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+/* النافذة */
+.feedback-modal {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  text-align: center;
+}
+
+/* العنوان */
+.feedback-modal h3 { margin: 0 0 0.8rem; }
+
+/* النجوم */
+.stars { margin: 0.5rem 0 1rem; }
+.star {
+  font-size: 2.2rem;
+  color: #ddd;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: transform .12s ease, color .12s ease;
+}
+.star:hover { transform: translateY(-4px); }
+.star.filled { color: #f5b301; }
+
+/* textarea */
+.feedback-modal textarea {
+  width: 100%;
+  min-height: 90px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  resize: vertical;
+  font-size: 0.98rem;
+}
+
+/* الأزرار */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+}
+.modal-actions button {
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.modal-actions button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.modal-actions button:first-child {
+  background: #0b76ff;
+  color: white;
+}
+.modal-actions button.cancel {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* responsive */
+@media (max-width: 420px) {
+  .star { font-size: 1.8rem; margin: 0 4px; }
+}

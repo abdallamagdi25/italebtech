@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
+import './AnimatedPage.css';
 
 const AdminRoute = ({ children }) => {
   const { currentUser } = useAuth();

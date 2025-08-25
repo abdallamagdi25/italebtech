@@ -6,10 +6,10 @@ import { useAuth } from '../../context/AuthContext';
 import './Admin.css';
 
 const AddArticle = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, setIsProcessing } = useAuth();
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
-  const [content, setContent] = useState(''); // New field for full content
+  const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = async (e) => {
@@ -17,23 +17,37 @@ const AddArticle = () => {
     if (!title || !summary || !imageUrl || !content) {
       return toast.error("يرجى ملء جميع الحقول.");
     }
+    
+    setIsProcessing(true); // Show loader
     try {
+      if (!currentUser || !currentUser.uid) {
+        // Safety check to ensure a user is logged in
+        toast.error("يجب تسجيل الدخول كمسؤول لإضافة مقال.");
+        return;
+      }
+
       await addDoc(collection(db, 'articles'), {
         title,
         summary,
-        content, // Add content to database
+        content,
         imageUrl,
-        authorName: currentUser.firstName || currentUser.email, // Use author's name
+        authorName: currentUser.firstName || currentUser.email,
         authorId: currentUser.uid,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp()
       });
       toast.success("تمت إضافة المقال بنجاح!");
-      // Clear fields
-      setTitle(''); setSummary(''); setContent(''); setImageUrl('');
+      
+      // Clear fields after submission
+      setTitle(''); 
+      setSummary(''); 
+      setContent(''); 
+      setImageUrl('');
     } catch (error) {
       toast.error("حدث خطأ أثناء إضافة المقال.");
       console.error("Error adding article: ", error);
+    } finally {
+      setIsProcessing(false); // Hide loader
     }
   };
 

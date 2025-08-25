@@ -3,9 +3,10 @@ import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import './Sidebar.css';
+import { motion } from 'framer-motion';
 
 const Sidebar = () => {
-  const { articleId } = useParams(); // To exclude the current article
+  const { articleId } = useParams();
   const [latestArticles, setLatestArticles] = useState([]);
 
   useEffect(() => {
@@ -13,18 +14,22 @@ const Sidebar = () => {
       const articlesRef = collection(db, 'articles');
       const q = query(articlesRef, orderBy('createdAt', 'desc'), limit(6));
       const snapshot = await getDocs(q);
-      // Filter out the current article from the list
       const articles = snapshot.docs
         .map(doc => ({ id: doc.id, ...doc.data() }))
         .filter(doc => doc.id !== articleId)
-        .slice(0, 5); // Ensure we have 5 articles
+        .slice(0, 5);
       setLatestArticles(articles);
     };
     fetchLatest();
   }, [articleId]);
 
   return (
-    <aside className="article-sidebar">
+    <motion.aside 
+      className="article-sidebar"
+      initial={{ opacity: 0, x: -50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+    >
       <h3>أحدث المقالات</h3>
       <div className="sidebar-articles-list">
         {latestArticles.map(article => (
@@ -34,7 +39,7 @@ const Sidebar = () => {
           </Link>
         ))}
       </div>
-    </aside>
+    </motion.aside>
   );
 };
 

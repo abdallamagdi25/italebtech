@@ -1,87 +1,104 @@
-// src/App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from './context/AuthContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AuthProvider } from './context/AuthContext';
+import { AnimatePresence } from 'framer-motion';
 import './App.css';
 
 // Import Components & Pages
-import Preloader from './components/Preloader';
-import AnimatedPage from './components/AnimatedPage';
+import TransitionLoader from './components/common/TransitionLoader';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
+
+// Import all pages directly
 import HomePage from './pages/HomePage';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
-import ProtectedRoute from './components/ProtectedRoute';
+import ForgotPassword from './components/auth/ForgotPassword';
+import CompleteProfile from './components/auth/CompleteProfile';
 import Dashboard from './components/Dashboard';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-// import Subscribe from './components/Subscribe';
+import Subscribe from './components/Subscribe';
 import ProfilePage from './components/ProfilePage';
-import CompleteProfile from './components/auth/CompleteProfile';
+import InfoPage from './pages/InfoPage';
+import ArticlePage from './pages/ArticlePage';
 import AddCourse from './components/admin/AddCourse';
-import NotFound from './components/NotFound';
-import AboutPage from './pages/AboutPage';
-import AddArticle from './components/admin/AddArticle';
-import ForgotPassword from './components/auth/ForgotPassword';
-import AdminRoute from './components/AdminRoute';
 import AdminCoursesList from './components/admin/AdminCoursesList';
 import ManageLessons from './components/admin/ManageLessons';
-import ArticlePage from './pages/ArticlePage';
+import AddArticle from './components/admin/AddArticle';
 import AdminArticlesList from './components/admin/AdminArticlesList';
 import EditArticle from './components/admin/EditArticle';
-import InfoPage from './pages/InfoPage';
 import AdminUsersList from './components/admin/AdminUsersList';
 import AdminUserDetail from './components/admin/AdminUserDetail';
+import NotFound from './components/NotFound';
+import ArticlesPage from './pages/ArticlesPage';
+import FeedbackTrigger from './components/FeedbackTrigger';
+import AboutPage from './pages/AboutPage';
+import EditCourse from './components/admin/EditCourse'; // استورده في الأعلى
 
-// داخل Routes
 
 
-// داخل Routes
-
-// This is the main application content, now wrapped in a Router
-const MainApp = () => {
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
+  useEffect(() => {
+    // Scroll to top on page change
+    window.scrollTo(0, 0);
+
+    // Simulate loading for each page transition
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // يمكنك تعديل مدة التحميل من هنا
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+  
+  
   return (
     <div className="app-container">
+      <FeedbackTrigger />
       <Navbar />
       <ToastContainer position="bottom-center" autoClose={4000} rtl={true} />
       <main className="main-content">
         <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
-            <Route path="/signup" element={<AnimatedPage><SignUp /></AnimatedPage>} />
-            <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
-            <Route path="/articles/:articleId" element={<AnimatedPage><ArticlePage /></AnimatedPage>} />
-            <Route path="/info" element={<AnimatedPage><InfoPage /></AnimatedPage>} />
+          {isLoading ? (
+            <TransitionLoader key="loader" />
+          ) : (
+            <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/info" element={<InfoPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+                <Route path="/articles/:articleId" element={<ProtectedRoute><ArticlePage /></ProtectedRoute>} />
+                <Route path="/articles" element={<ProtectedRoute><ArticlesPage /></ProtectedRoute>} />
+                <Route path="/courses/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
+                <Route path="/subscribe" element={<ProtectedRoute><Subscribe /></ProtectedRoute>} />
+                <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+                <Route path="/complete-profile" element={<ProtectedRoute><CompleteProfile /></ProtectedRoute>} />
 
-            {/* Protected Routes */}
-            <Route path="/dashboard" element={<ProtectedRoute><AnimatedPage><Dashboard /></AnimatedPage></ProtectedRoute>} />
-            <Route path="/courses" element={<ProtectedRoute><AnimatedPage><Courses /></AnimatedPage></ProtectedRoute>} />
-            <Route path="/courses/:courseId" element={<ProtectedRoute><AnimatedPage><CourseDetail /></AnimatedPage></ProtectedRoute>} />
-            {/* <Route path="/subscribe" element={<ProtectedRoute><AnimatedPage><Subscribe /></AnimatedPage></ProtectedRoute>} /> */}
-            {/* <Route path="/subscribe" element={<ProtectedRoute><AnimatedPage><Subscribe /></AnimatedPage></ProtectedRoute>} /> */}
-            <Route path="/profile" element={<ProtectedRoute><AnimatedPage><ProfilePage /></AnimatedPage></ProtectedRoute>} />
-            <Route path="/complete-profile" element={<ProtectedRoute><AnimatedPage><CompleteProfile /></AnimatedPage></ProtectedRoute>} />
-            <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
-            <Route path="/forgot-password" element={<AnimatedPage><ForgotPassword /></AnimatedPage>} />
-            {/* Admin Routes */}
-            <Route path="/admin/add-article" element={<ProtectedRoute><AdminRoute><AddArticle /></AdminRoute></ProtectedRoute>} />
-            <Route path="/admin/add-course" element={<ProtectedRoute><AnimatedPage><AdminRoute><AddCourse /></AdminRoute></AnimatedPage></ProtectedRoute>} />
-            <Route path="/admin/courses" element={<ProtectedRoute><AdminRoute><AdminCoursesList /></AdminRoute></ProtectedRoute>} />
-            <Route path="/admin/course/:courseId/lessons" element={<ProtectedRoute><AdminRoute><ManageLessons /></AdminRoute></ProtectedRoute>} />
-            <Route path="/admin/articles" element={<ProtectedRoute><AdminRoute><AdminArticlesList /></AdminRoute></ProtectedRoute>} />
-            <Route path="/admin/edit-article/:articleId" element={<ProtectedRoute><AdminRoute><EditArticle /></AdminRoute></ProtectedRoute>} />
-            <Route path="/admin/users" element={<ProtectedRoute><AdminRoute><AdminUsersList /></AdminRoute></ProtectedRoute>} />
-            <Route path="/admin/user/:userId" element={<ProtectedRoute><AdminRoute><AdminUserDetail /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/users" element={<ProtectedRoute><AdminRoute><AdminUsersList /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/user/:userId" element={<ProtectedRoute><AdminRoute><AdminUserDetail /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/courses" element={<ProtectedRoute><AdminRoute><AdminCoursesList /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/course/:courseId/lessons" element={<ProtectedRoute><AdminRoute><ManageLessons /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/add-course" element={<ProtectedRoute><AdminRoute><AddCourse /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/add-article" element={<ProtectedRoute><AdminRoute><AddArticle /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/articles-list" element={<ProtectedRoute><AdminRoute><AdminArticlesList /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/edit-article/:articleId" element={<ProtectedRoute><AdminRoute><EditArticle /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/edit-course/:courseId" element={<ProtectedRoute><AdminRoute><EditCourse /></AdminRoute></ProtectedRoute>} />
 
-
-            <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
-          </Routes>
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+          )}
         </AnimatePresence>
       </main>
       <Footer />
@@ -89,25 +106,13 @@ const MainApp = () => {
   );
 }
 
-// The root component that decides what to show, now wrapped in the Router
-function App() {
-  const { loading } = useAuth();
+// The root component that wraps everything
+const Root = () => (
+  <Router>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </Router>
+);
 
-  return (
-    <Router>
-      <AnimatePresence>
-        {loading ? (
-          <motion.div key="preloader" exit={{ opacity: 0 }}>
-            <Preloader />
-          </motion.div>
-        ) : (
-          <motion.div key="main-app" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <MainApp />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Router>
-  );
-}
-
-export default App;
+export default Root;

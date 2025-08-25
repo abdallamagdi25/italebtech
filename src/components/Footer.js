@@ -2,8 +2,8 @@ import React from 'react';
 import './Footer.css';
 // 1. استيراد أيقونات جديدة
 import { FaFacebookF, FaLinkedinIn, FaYoutube, FaInstagram } from 'react-icons/fa';
-import { FiInfo, FiGrid, FiHelpCircle } from 'react-icons/fi';
-import logo from '../assets/images/logo.png';
+import { FiInfo, FiGrid } from 'react-icons/fi';
+import logo from '../assets/images/full-logo.png';
 
 const Footer = () => {
   return (
@@ -30,12 +30,6 @@ const Footer = () => {
               <a href="/courses">
                 <FiGrid className="footer-link-icon" />
                 <span>الدورات</span>
-              </a>
-            </li>
-            <li>
-              <a href="/#faq">
-                <FiHelpCircle className="footer-link-icon" />
-                <span>الأسئلة الشائعة</span>
               </a>
             </li>
           </ul>

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 // import { FiChevronDown } from 'react-icons/fi'; // فقط هذه الأيقونة
-import heroImage from '../assets/images/hero.png';
+import heroImage from '../assets/images/full-logo.png';
 
 const Hero = () => {
   const navigate = useNavigate(); // 3. تهيئة أداة التوجيه

@@ -2,11 +2,6 @@
   padding: 4rem 2rem;
 }
 
-.course-card-link {
-  text-decoration: none;
-  color: inherit;
-}
-
 .courses-page h1 {
   text-align: center;
   margin-bottom: 3rem;
@@ -19,13 +14,22 @@
   gap: 2rem;
 }
 
+/* --- The Fix Starts Here --- */
+
+.course-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex; /* Important for equal height */
+}
+
 .course-card {
   background-color: var(--surface-color);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  display: flex; /* Make card a flex container */
+  flex-direction: column; /* Stack image and content vertically */
+  width: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -34,29 +38,47 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
+.course-card-image {
+  height: 180px;
+  width: 100%;
+}
+
+.course-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .course-card-content {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  /* Makes the content fill the card */
+  flex-grow: 1; /* This makes the content area fill the available space */
 }
 
 .course-card-content h2 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .course-card-content p {
   color: var(--text-secondary-color);
-  flex-grow: 1;
-  /* Pushes the level down */
+  flex-grow: 1; /* This pushes the badge to the bottom */
   margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  
+  /* Truncate text to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 .course-level-badge {
-  align-self: flex-start;
-  /* Aligns badge to the left */
+  align-self: flex-start; /* Aligns badge to the start (right in RTL) */
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
   background-color: var(--primary-color);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from '../../firebase';
 import { toast } from 'react-toastify';
 import './Admin.css';
@@ -8,6 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 const AddCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [level, setLevel] = useState('Beginner');
   const { setIsProcessing } = useAuth();
 
@@ -15,8 +16,8 @@ const AddCourse = () => {
     e.preventDefault();
     setIsProcessing(true);
 
-    if (!title || !description || !level) {
-      return alert("Please fill out all fields.");
+    if (!title || !description || !level || !imageUrl) {
+      return toast.error("يرجى ملء جميع الحقول.");
     }
 
     try {
@@ -24,7 +25,8 @@ const AddCourse = () => {
         title: title,
         description: description,
         level: level,
-        createdAt: new Date()
+        imageUrl: imageUrl,
+        createdAt: serverTimestamp()
       });
 
       toast.success("تمت إضافة الدورة بنجاح!");
@@ -78,6 +80,18 @@ const AddCourse = () => {
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="imageUrl">رابط صورة الدورة</label>
+          <input
+            id="imageUrl"
+            name="imageUrl"
+            type="url"
+            placeholder="https://example.com/image.png"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            required
+          />
         </div>
         <button type="submit" className="submit-btn">Add Course</button>
       </form>

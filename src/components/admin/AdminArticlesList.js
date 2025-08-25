@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebase';
-import { collection, getDocs, orderBy, query, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, query, deleteDoc, doc, orderBy } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import './Admin.css';
 
@@ -32,7 +32,7 @@ const AdminArticlesList = () => {
       try {
         await deleteDoc(doc(db, "articles", id));
         toast.success("تم حذف المقال بنجاح.");
-        fetchArticles(); // Refresh the list
+        fetchArticles();
       } catch (error) {
         toast.error("حدث خطأ أثناء الحذف.");
       }

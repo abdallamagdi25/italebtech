@@ -94,7 +94,7 @@ const ProfilePage = () => {
                   <FiFileText className="profile-menu-icon" />
                   <span>إضافة مقال جديد</span>
                 </Link>
-                <Link to="/admin/articles" className="profile-menu-item">
+                <Link to="/admin/articles-list" className="profile-menu-item">
                   <FiFileText className="profile-menu-icon" />
                   <span>إدارة المقالات</span>
                 </Link>

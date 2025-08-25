@@ -53,6 +53,9 @@ const Courses = () => {
               {courses.map(course => (
                 <Link to={`/courses/${course.id}`} key={course.id} className="course-card-link">
                   <motion.div key={course.id} className="course-card" variants={itemVariants}>
+                    <div className="course-card-image">
+                      <img src={course.imageUrl} alt={course.title} />
+                    </div>
                     <div className="course-card-content">
                       <h2>{course.title}</h2>
                       <p>{course.description}</p>
@@ -65,6 +68,7 @@ const Courses = () => {
             </motion.div>
           )}
         </motion.div>
+
 
       )}
     </>

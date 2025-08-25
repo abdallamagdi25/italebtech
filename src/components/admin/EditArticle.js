@@ -3,11 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
 import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../context/AuthContext'; // Added for isProcessing
 import './Admin.css';
 
 const EditArticle = () => {
   const { articleId } = useParams();
   const navigate = useNavigate();
+  const { setIsProcessing } = useAuth(); // Added for isProcessing
   const [formData, setFormData] = useState({
     title: '', summary: '', content: '', imageUrl: ''
   });
@@ -21,7 +23,7 @@ const EditArticle = () => {
         setFormData(docSnap.data());
       } else {
         toast.error("لم يتم العثور على المقال!");
-        navigate('/admin/articles');
+        navigate('/articles', { replace: true });
       }
       setLoading(false);
     };
@@ -34,6 +36,7 @@ const EditArticle = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsProcessing(true);
     try {
       const articleRef = doc(db, "articles", articleId);
       await updateDoc(articleRef, {
@@ -41,10 +44,12 @@ const EditArticle = () => {
         updatedAt: serverTimestamp()
       });
       toast.success("تم تحديث المقال بنجاح!");
-      navigate('/admin/articles');
+      navigate('/articles');
     } catch (error) {
       toast.error("حدث خطأ أثناء التحديث.");
       console.error("Error updating article: ", error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -54,7 +59,6 @@ const EditArticle = () => {
     <div className="admin-container">
       <h2>تعديل المقال: {formData.title}</h2>
       <form className="admin-form" onSubmit={handleSubmit}>
-        {/* Form fields are the same as AddArticle.js but with name attributes */}
         <div className="form-group">
           <label>عنوان المقال</label>
           <input type="text" name="title" value={formData.title} onChange={handleChange} />

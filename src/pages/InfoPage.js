@@ -1,7 +1,7 @@
 import React from 'react';
 import './InfoPage.css';
-import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
-import logo from '../assets/images/logo.png';
+import { FaFacebookF, FaLinkedinIn, FaYoutube, FaInstagram } from 'react-icons/fa';
+import logo from '../assets/images/full-logo.png';
 
 const InfoPage = () => {
   return (
@@ -18,9 +18,10 @@ const InfoPage = () => {
           <a href="mailto:italebtech@gmail.com">italebtech@gmail.com</a>
         </p>
         <div className="social-links-info">
-          <a href="facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
-          <a href="facebook.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
-          <a href="facebook.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+            <a href="https://facebook.com/italebtech" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
+            <a href="https://instagram.com/italebtech" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+            <a href="https://linkedin.com/company/italebtech" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
+            <a href="https://youtube.com/@iTalebTech" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
         </div>
       </div>
       <div className="info-footer">

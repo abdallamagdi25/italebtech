@@ -200,3 +200,44 @@
   padding: 1rem;
   border-radius: 5px;
 }
+
+/* --- Modal Styles --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  background: var(--surface-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content .submit-btn, .modal-content .cancel-btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.modal-content .cancel-btn {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

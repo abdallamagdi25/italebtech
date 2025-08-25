@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import './Navbar.css';
 import { FiHome, FiGrid, FiUser, FiLogIn, FiSearch, FiBell, FiInfo } from 'react-icons/fi';
 import logo from '../assets/images/logo.png';
+import { FiFileText } from 'react-icons/fi';
+
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
@@ -37,6 +39,7 @@ const Navbar = () => {
           <ul className="desktop-links">
             <li><NavLink to="/">الرئيسية</NavLink></li>
             <li><NavLink to="/courses">الدورات</NavLink></li>
+            {currentUser && <li><NavLink to="/articles">المقالات</NavLink></li>}
             {currentUser && <li><NavLink to="/dashboard">لوحة التحكم</NavLink></li>}
           </ul>
         </div>
@@ -44,7 +47,7 @@ const Navbar = () => {
           <div className="navbar-icons">
             <button onClick={handleFeatureSoon} className="icon-btn"><FiSearch /></button>
             <button onClick={handleFeatureSoon} className="icon-btn"><FiBell /></button>
-            
+
             {/* --- The New Profile Icon Link --- */}
             {currentUser && (
               <NavLink to="/profile" className="icon-btn profile-icon">
@@ -73,13 +76,21 @@ const Navbar = () => {
       <nav className="navbar-mobile">
         <NavLink to="/" className="mobile-nav-link"><FiHome /><span>الرئيسية</span></NavLink>
         <NavLink to="/courses" className="mobile-nav-link"><FiGrid /><span>الدورات</span></NavLink>
+
+        {/* ✅ مقالات للمستخدم فقط */}
+        {currentUser && (
+          <NavLink to="/articles" className="mobile-nav-link"><FiFileText /><span>مقالات</span></NavLink>
+        )}
+
         {currentUser ? (
           <NavLink to="/profile" className="mobile-nav-link"><FiUser /><span>حسابي</span></NavLink>
         ) : (
           <NavLink to="/login" className="mobile-nav-link"><FiLogIn /><span>الدخول</span></NavLink>
         )}
+
         <NavLink to="/info" className="mobile-nav-link"><FiInfo /><span>معلومات</span></NavLink>
       </nav>
+
     </>
   );
 };
