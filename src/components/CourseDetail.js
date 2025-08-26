@@ -6,6 +6,8 @@ import { useAuth } from '../context/AuthContext';
 import './CourseDetail.css';
 import { FiLock, FiPlayCircle } from 'react-icons/fi';
 import { toast } from 'react-toastify';
+import ReactMarkdown from 'react-markdown';
+
 
 const CourseDetail = () => {
   const { courseId } = useParams();
@@ -54,8 +56,12 @@ const CourseDetail = () => {
   return (
     <div className="course-detail-page">
       <header className="course-detail-header">
-        <h1>{course.title}</h1>
-        <p>{course.description}</p>
+        <div className="course-card-image">
+          <img src={course.imageUrl} alt={course.title} />
+        </div>
+        <div className="course-description-markdown">
+          <ReactMarkdown>{course.description}</ReactMarkdown>
+        </div>
         <span className="level-badge">{course.level}</span>
       </header>
 

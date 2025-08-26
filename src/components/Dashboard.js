@@ -28,7 +28,7 @@ const Dashboard = () => {
             ) : (
               <p className="status-inactive">غير فعال</p>
             )}
-            <a href="https://wa.me/+201032296981" target="_blank" rel="noopener noreferrer" className="widget-link">
+            <a href="https://wa.me/+201146924905" target="_blank" rel="noopener noreferrer" className="widget-link">
               تواصل معنا لتفعيل اشتراكك
             </a>
           </div>

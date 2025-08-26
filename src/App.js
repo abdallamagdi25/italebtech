@@ -22,7 +22,7 @@ import CompleteProfile from './components/auth/CompleteProfile';
 import Dashboard from './components/Dashboard';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-import Subscribe from './components/Subscribe';
+// import Subscribe from './components/Subscribe';
 import ProfilePage from './components/ProfilePage';
 import InfoPage from './pages/InfoPage';
 import ArticlePage from './pages/ArticlePage';
@@ -82,7 +82,7 @@ function App() {
                 <Route path="/articles/:articleId" element={<ProtectedRoute><ArticlePage /></ProtectedRoute>} />
                 <Route path="/articles" element={<ProtectedRoute><ArticlesPage /></ProtectedRoute>} />
                 <Route path="/courses/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
-                <Route path="/subscribe" element={<ProtectedRoute><Subscribe /></ProtectedRoute>} />
+                {/* <Route path="/subscribe" element={<ProtectedRoute><Subscribe /></ProtectedRoute>} /> */}
                 <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
                 <Route path="/complete-profile" element={<ProtectedRoute><CompleteProfile /></ProtectedRoute>} />
 

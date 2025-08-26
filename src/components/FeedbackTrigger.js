@@ -4,8 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const SURVEY_DELAY_MS = 30_000; // للـ testing: 30 ثانية — غيّره لـ 5*60*1000 = 5 دقائق عند النشر
-const REPEAT_DAYS = 30; // بعد كم يوم نعرض للمستخدم مرة تانية
+const SURVEY_DELAY_MS = 3*60*1000; // للـ testing: 30 ثانية — غيّره لـ 5*60*1000 = 5 دقائق عند النشر
+const REPEAT_DAYS = 10; // بعد كم يوم نعرض للمستخدم مرة تانية
 
 const FeedbackTrigger = () => {
   const { currentUser } = useAuth();

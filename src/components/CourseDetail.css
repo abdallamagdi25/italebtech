@@ -156,3 +156,39 @@
     justify-content: center;
   }
 }
+
+/* --- Markdown Styles for Course Description --- */
+.course-description-markdown {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: right; /* Ensure text is right-aligned */
+}
+
+.course-description-markdown h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.course-description-markdown ul {
+  padding-right: 20px; /* Indent list for RTL */
+}
+
+.course-description-markdown li {
+  margin-bottom: 0.5rem;
+}
+
+.course-description-markdown strong {
+  color: var(--primary-color);
+}
+
+.course-card-image {
+  height: 180px;
+  width: 100%;
+}
+
+.course-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

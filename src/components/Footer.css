@@ -17,9 +17,10 @@
 
 .footer-section {
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
 .footer-section h3 {
